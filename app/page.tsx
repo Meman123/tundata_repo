@@ -13,6 +13,7 @@ export default function Home() {
         alt="Tundata Logo"
         width={400}
         height={400}
+        style={{ objectFit: "contain" }}
       />
     </div>
   );
