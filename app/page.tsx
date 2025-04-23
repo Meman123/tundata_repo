@@ -18,21 +18,22 @@ export default function Home() {
       />
       <style jsx>{`
         .logo {
-          width: 50%;
+          width: 30vw;
+          max-width: 400px;
           height: auto;
         }
 
         @media (min-width: 1024px) {
           .logo {
-            width: 400px;
-            height: 400px;
+            width: 20vw;
+            max-width: 400px;
           }
         }
 
         @media (max-width: 768px) {
           .logo {
-            width: 200px;
-            height: 200px;
+            width: 50vw;
+            max-width: 200px;
           }
         }
       `}</style>
