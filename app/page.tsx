@@ -12,6 +12,8 @@ export default function Home() {
         src="/TundataLogo.svg"
         alt="Tundata Logo"
         className="logo"
+        width={400} // Default width for desktop
+        height={400} // Default height for desktop
         style={{ objectFit: "contain" }}
       />
       <style jsx>{`
