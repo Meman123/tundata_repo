@@ -11,10 +11,29 @@ export default function Home() {
       <Image
         src="/TundataLogo.svg"
         alt="Tundata Logo"
-        width={400}
-        height={400}
+        className="logo"
         style={{ objectFit: "contain" }}
       />
+      <style jsx>{`
+        .logo {
+          width: 50%;
+          height: auto;
+        }
+
+        @media (min-width: 1024px) {
+          .logo {
+            width: 400px;
+            height: 400px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .logo {
+            width: 200px;
+            height: 200px;
+          }
+        }
+      `}</style>
     </div>
   );
 }
