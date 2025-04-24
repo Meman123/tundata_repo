@@ -1,16 +1,30 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function PulseLine() {
   const pulse1Ref = useRef<SVGUseElement>(null);
   const pulse2Ref = useRef<SVGUseElement>(null);
+  const [viewBox, setViewBox] = useState("0 0 1500 200");
 
   useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setViewBox("0 0 500 400"); // más altura en móviles
+      } else {
+        setViewBox("0 0 1000 200");
+      }
+    };
+
+    handleResize(); // Ejecutar una vez al montar
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    const svgWidth = 6000;
     const pulse1 = pulse1Ref.current;
     const pulse2 = pulse2Ref.current;
-    const svgWidth = 6000;
 
     if (pulse1 && pulse2) {
       gsap.set(pulse1, { x: 0 });
@@ -32,20 +46,10 @@ export default function PulseLine() {
     }
   }, []);
 
-  useEffect(() => {
-    gsap.to("feGaussianBlur", {
-      attr: { stdDeviation: 6 },
-      duration: 1.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-    });
-  }, []);
-
   return (
-    <div className="w-full max-w-[800px] md:max-w-[90%] sm:max-w-full mx-auto overflow-hidden px-4 sm:px-6">
+    <div className="w-full overflow-hidden">
       <svg
-        viewBox="0 0 1500 200"
+        viewBox={viewBox}
         preserveAspectRatio="xMidYMid"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
@@ -61,9 +65,6 @@ export default function PulseLine() {
             <rect width="100%" height="100%" fill="url(#fadeGradient)" />
           </mask>
         </defs>
-
-    
-
 
         <g mask="url(#fadeMask)">
           <use
