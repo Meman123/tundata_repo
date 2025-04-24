@@ -12,7 +12,7 @@ export default function PulseLine() {
       if (width < 640) {
         setViewBox("0 0 500 400"); // más altura en móviles
       } else {
-        setViewBox("0 0 1000 200");
+        setViewBox("0 0 1500 200");
       }
     };
 
@@ -47,7 +47,7 @@ export default function PulseLine() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden">
+    <div className="w-full overflow-hidden px-0 sm:px-4 md:px-12 lg:px-24">
       <svg
         viewBox={viewBox}
         preserveAspectRatio="xMidYMid"
