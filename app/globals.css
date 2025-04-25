@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -28,4 +32,27 @@ body {
 svg {
   font-family: initial !important;
   all: unset;
+}
+
+/* Keyframes definition for the 'subtle-wave' animation using clip-path */
+@keyframes subtle-wave {
+  0%, 100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(
+      0% 0%,    /* Top-left */
+      100% 0%,  /* Top-right */
+      100% 50%, /* Bottom-right (MUCHO más arriba) */
+      75% 100%, /* Bottom-center-right (abajo) */
+      50% 50%,  /* Bottom-center (MUCHO más arriba) */
+      25% 100%, /* Bottom-center-left (abajo) */
+      0% 50%   /* Bottom-left (MUCHO más arriba) */
+    );
+  }
+}
+
+/* Utility class to apply the subtle-wave animation */
+.animate-subtle-wave {
+  animation: subtle-wave 0.6s ease-in-out infinite;
 }
