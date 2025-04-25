@@ -2,12 +2,10 @@
 
 import Image from "next/image";
 import PulseLine from "./PulseLine";
-import Header from "./Header";
 
 export default function Home() {
   return (
     <>
-      <Header />
       <div className="min-h-[200vh] bg-[#14344b] flex flex-col justify-center items-center px-6 py-12 space-y-20">
         {/* Logo centrado */}
         <div className="flex justify-center items-center">
