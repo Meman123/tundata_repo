@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "animejs": "^4.0.2",
     "flubber": "^0.4.2",
     "gsap": "^3.12.7",
     "next": "15.3.1",

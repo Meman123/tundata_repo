@@ -4,16 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Definimos variables globales */
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -23,36 +17,38 @@
   }
 }
 
+/* Aplicación base */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Arial, Helvetica, sans-serif;
 }
 
+/* Correcciones generales para SVG */
 svg {
   font-family: initial !important;
   all: unset;
 }
 
-/* Keyframes definition for the 'subtle-wave' animation using clip-path */
+/* Keyframes para animaciones */
 @keyframes subtle-wave {
   0%, 100% {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
   50% {
     clip-path: polygon(
-      0% 0%,    /* Top-left */
-      100% 0%,  /* Top-right */
-      100% 50%, /* Bottom-right (MUCHO más arriba) */
-      75% 100%, /* Bottom-center-right (abajo) */
-      50% 50%,  /* Bottom-center (MUCHO más arriba) */
-      25% 100%, /* Bottom-center-left (abajo) */
-      0% 50%   /* Bottom-left (MUCHO más arriba) */
+      0% 0%, 
+      100% 0%, 
+      100% 50%, 
+      75% 100%, 
+      50% 50%, 
+      25% 100%, 
+      0% 50%
     );
   }
 }
 
-/* Utility class to apply the subtle-wave animation */
+/* Clase utilitaria para aplicar la animación */
 .animate-subtle-wave {
   animation: subtle-wave 0.6s ease-in-out infinite;
 }

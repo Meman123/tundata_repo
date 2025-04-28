@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
@@ -71,7 +73,7 @@ export default function PulseLine() {
             href="/linea2.svg#pulse-path-shape"
             ref={pulse1Ref}
             fill="none"
-            stroke="#F4A207"
+            stroke="#F39C12" // color actualizado
             strokeWidth="2"
             vectorEffect="non-scaling-stroke"
           />
@@ -79,7 +81,7 @@ export default function PulseLine() {
             href="/linea2.svg#pulse-path-shape"
             ref={pulse2Ref}
             fill="none"
-            stroke="#F4A207"
+            stroke="#F39C12" // color actualizado
             strokeWidth="2"
             vectorEffect="non-scaling-stroke"
           />
