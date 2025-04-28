@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-import PulseLine from "./PulseLine";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 
