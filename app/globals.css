@@ -1,54 +1,73 @@
+/* === Tailwind base === */
 @import "tailwindcss";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definimos variables globales */
+/* ======================================================
+   1. Variables de diseño (modo claro / modo oscuro)
+   ====================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Colores Tundata */
+  --color-primary: #F39C12;          /* naranja principal  */
+  --color-primary-hover: #D88C0A;    /* naranja hover      */
+  --color-background: #14344B;       /* azul de fondo      */
+  --color-text: #FFFFFF;             /* texto principal    */
+  --color-subtle: #E5E7EB;           /* gris claro         */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-background: #0a0a0a;
+    --color-text: #ededed;
+    /* Puedes añadir variantes oscuras si las necesitas */
   }
 }
 
-/* Aplicación base */
+/* ======================================================
+   2. Estilos base aplicados al documento
+   ====================================================== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'IBM Plex Sans', Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
 }
 
-/* Correcciones generales para SVG */
+/* ======================================================
+   3. Utilidades personalizadas tipo Tailwind
+   ====================================================== */
+@layer utilities {
+  /* Fondos */
+  .bg-primary            { background-color: var(--color-primary); }
+  .bg-background         { background-color: var(--color-background); }
+  .bg-primary-hover      { background-color: var(--color-primary-hover); }
+
+  /* Texto */
+  .text-primary          { color: var(--color-primary); }
+  .text-subtle           { color: var(--color-subtle); }
+
+  /* Hover helpers */
+  .hover\:bg-primary-hover:hover {
+    background-color: var(--color-primary-hover);
+  }
+}
+
+/* ======================================================
+   4. Ajustes globales menores
+   ====================================================== */
 svg {
-  font-family: initial !important;
-  all: unset;
+  font-family: initial !important;   /* evita heredar IBM Plex Sans */
+  all: unset;                        /* reseteo seguro */
 }
 
-/* Keyframes para animaciones */
+/* Animación auxiliar opcional */
 @keyframes subtle-wave {
-  0%, 100% {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  }
-  50% {
-    clip-path: polygon(
-      0% 0%, 
-      100% 0%, 
-      100% 50%, 
-      75% 100%, 
-      50% 50%, 
-      25% 100%, 
-      0% 50%
-    );
+  0%, 100%   { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
+  50%        { clip-path: polygon(
+                  0% 0%, 100% 0%, 100% 50%,
+                  75% 100%, 50% 50%, 25% 100%, 0% 50% );
   }
 }
-
-/* Clase utilitaria para aplicar la animación */
 .animate-subtle-wave {
   animation: subtle-wave 0.6s ease-in-out infinite;
 }

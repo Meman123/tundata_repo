@@ -26,6 +26,7 @@ export default function Hero() {
           </p>
         </div>
 
+
         {/* Línea PulseLine */}
         <div className="w-full">
           <PulseLine />
