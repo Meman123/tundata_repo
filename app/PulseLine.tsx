@@ -8,43 +8,47 @@ export default function PulseLine() {
   const pulseB = useRef<SVGUseElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  /* 1️⃣  ViewBox responsivo — mantiene tu escala visual */
-  const [viewBox, setViewBox] = useState("0 0 900 100"); // desktop por defecto
+  const [viewBox, setViewBox] = useState("0 0 900 100");
 
   useEffect(() => {
     const updateViewBox = () => {
       const w = window.innerWidth;
-      if (w < 425) setViewBox("0 0 300 100");          // móvil XS
-      else if (w < 640) setViewBox("0 0 400 100");     // móvil-tablet
-      else if (w < 1024) setViewBox("0 0 600 100");    // laptop
-      else setViewBox("0 0 900 100");                  // desktop
+      if (w < 425) setViewBox("0 0 300 100");
+      else if (w < 640) setViewBox("0 0 400 100");
+      else if (w < 1024) setViewBox("0 0 600 100");
+      else setViewBox("0 0 900 100");
     };
 
-    updateViewBox(); // primera vez
-    // Usamos ResizeObserver para evitar muchos listeners
+    updateViewBox();
     const ro = new ResizeObserver(updateViewBox);
     ro.observe(document.documentElement);
     return () => ro.disconnect();
   }, []);
 
-  /* 2️⃣  Animación GSAP usando la longitud real del path */
   useEffect(() => {
     if (!pulseA.current || !pulseB.current) return;
 
-    // Longitud real del path dentro del SVG importado
-    const width = pulseA.current.getBBox().width;
+    let raf: number;
 
-    gsap.set([pulseA.current, pulseB.current], { x: 0 });
-    gsap.set(pulseB.current, { x: -width });
+    const init = () => {
+      const width = pulseA.current!.getBBox().width;
 
-    const tl = gsap.timeline({ repeat: -1, defaults: { duration: 40, ease: "none" } });
-    tl.to(pulseA.current, { x: `+=${width}` }, 0)
-      .to(pulseB.current, { x: `+=${width}` }, 0);
+      if (width === 0) {
+        raf = requestAnimationFrame(init); // esperamos el siguiente tic
+        return;
+      }
 
-    // Limpieza
-    return () => {
-      tl.kill();
+      gsap.set([pulseA.current, pulseB.current], { x: 0 });
+      gsap.set(pulseB.current, { x: -width });
+
+      const tl = gsap.timeline({ repeat: -1, defaults: { duration: 40, ease: "none" } });
+      tl.to(pulseA.current, { x: `+=${width}` }, 0)
+        .to(pulseB.current, { x: `+=${width}` }, 0);
     };
+
+    init();
+
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   return (
@@ -52,12 +56,11 @@ export default function PulseLine() {
       <svg
         ref={svgRef}
         viewBox={viewBox}
-        preserveAspectRatio="xMinYMid slice" /* conserva tu framing lateral */
+        preserveAspectRatio="xMinYMid slice"
         className="w-full h-auto pointer-events-none"
         xmlns="http://www.w3.org/2000/svg"
       >
         <defs>
-          {/* Gradiente para desvanecer a la derecha (opcional ajustar %) */}
           <linearGradient id="fadeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="white" stopOpacity="1" />
             <stop offset="95%" stopColor="white" stopOpacity="1" />
@@ -69,12 +72,11 @@ export default function PulseLine() {
         </defs>
 
         <g mask="url(#fadeMask)">
-          {/* ⚠️  sin fill para que no aparezca el parche blanco */}
           <use
             href="/linea2.svg#pulse-path-shape"
             ref={pulseA}
             fill="none"
-            stroke="#F39C12"          /* cambia a #F48E07 cuando unifiques paleta */
+            stroke="#F39C12"  /* Cambiar a #F48E07 si quieres estandarizar */
             strokeWidth="1"
             vectorEffect="non-scaling-stroke"
           />
