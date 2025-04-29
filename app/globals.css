@@ -17,7 +17,7 @@
 
   /* Tipografía */
   --fs-h1: clamp(2.25rem, 5vw, 3.5rem); /* igual al diseño funcional */
-  --fs-body: 1.1rem;
+  --fs-body: clamp(0.85rem, 1.3vw, 1.1rem);
   --lh-tight: 1.2;
   --lh-relaxed: 1.6;
 }
