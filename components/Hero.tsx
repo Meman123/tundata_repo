@@ -10,15 +10,15 @@ export default function Hero() {
       <div className="w-full flex flex-col items-center gap-20">
         
         {/* Bloque de texto */}
-        <div className="w-full max-w-4xl px-6 sm:px-12 flex flex-col justify-center items-center gap-8 text-center">
+        <div className="w-full max-w-4xl px-6 sm:px-12 flex flex-col justify-center items-center gap-6 text-center">
           <h1 className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold leading-tight text-white capitalize">
-            Datos Públicos De <span className="text-[#F39C12]">Duitama</span> Para Todos
+            Datos Públicos De <span className="text-[#F39C12]" >Duitama</span> Para Todos
           </h1>
 
-          <p className="w-full max-w-2xl text-sm md:text-md lg:text-lg xl:text-xl font-normal leading-relaxed text-gray-200">
-            Seguimos, organizamos y compartimos <span className="text-[#F39C12]">datos públicos</span> de Duitama para
-            impulsar una ciudadanía <span className="text-[#F39C12]">más informada</span> y promover un gobierno
-            <span className="text-[#F39C12]"> más transparente</span>.
+          <p className="w-full max-w-xl text-md md:text-md lg:text-lg xl:text-lg font-light leading-relaxed text-gray-200">
+            Seguimos, organizamos y compartimos <span className="text-[#F39C12] font-regular">datos públicos</span> de Duitama para
+            impulsar una ciudadanía <span className="text-[#F39C12] font-regular">más informada</span> y promover un gobierno
+            <span className="text-[#F39C12] font-regular"> más transparente</span>.
           </p>
         </div>
 
