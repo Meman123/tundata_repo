@@ -12,15 +12,19 @@ export default function PulseLine() {
     const handleResize = () => {
       const width = window.innerWidth;
 
-      if (width < 640) {
+      if (width < 425) {
         // 📱 Mobile
-        setViewBox("0 0 600 100");
-      } else if (width < 1024) {
+        setViewBox("0 0 300 100");
+      } else if (width < 640 && width >= 425) {
         // 📱 Tablet
-        setViewBox("0 0 700 100");
+        setViewBox("0 0 400 100");
+      }
+      else if (width < 1024 && width >= 640) {
+        // 📱 laptop
+        setViewBox("0 0 600 100");
       } else {
-        // 💻 Laptop y Desktop
-        setViewBox("0 0 1000 100");
+        // 💻 Desktop
+        setViewBox("0 0 900 100");
       }
     };
 
@@ -78,9 +82,9 @@ export default function PulseLine() {
           <use
             href="/linea2.svg#pulse-path-shape"
             ref={pulse1Ref}
-            fill="none"
+            fill="white"
             stroke="#F39C12"
-            strokeWidth="2"
+            strokeWidth="1"
             vectorEffect="non-scaling-stroke"
           />
           <use
@@ -88,7 +92,7 @@ export default function PulseLine() {
             ref={pulse2Ref}
             fill="none"
             stroke="#F39C12"
-            strokeWidth="2"
+            strokeWidth="1"
             vectorEffect="non-scaling-stroke"
           />
         </g>
