@@ -9,18 +9,23 @@
    ====================================================== */
 :root {
   /* Colores Tundata */
-  --color-primary: #F39C12;          /* naranja principal  */
-  --color-primary-hover: #D88C0A;    /* naranja hover      */
-  --color-background: #14344B;       /* azul de fondo      */
-  --color-text: #FFFFFF;             /* texto principal    */
-  --color-subtle: #E5E7EB;           /* gris claro         */
+  --color-primary: #F39C12;
+  --color-primary-hover: #D88C0A;
+  --color-background: #14344B;
+  --color-text: #FFFFFF;
+  --color-subtle: #E5E7EB;
+
+  /* Tipografía */
+  --fs-h1: clamp(2.25rem, 5vw, 3.5rem); /* igual al diseño funcional */
+  --fs-body: 1rem;
+  --lh-tight: 1.2;
+  --lh-relaxed: 1.6;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: #0a0a0a;
     --color-text: #ededed;
-    /* Puedes añadir variantes oscuras si las necesitas */
   }
 }
 
@@ -50,22 +55,44 @@ body {
   .hover\:bg-primary-hover:hover {
     background-color: var(--color-primary-hover);
   }
+
+  /* Tipografía */
+  .text-h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-tight);
+    font-weight: 700;
+  }
+
+  .text-body {
+    font-size: var(--fs-body);
+    line-height: var(--lh-relaxed);
+    font-weight: 300;
+  }
+
+  /* Control opcional de ancho (solo si quieres mantenerlo) */
+  .max-w-hero-text {
+    max-width: 36rem;
+  }
 }
 
 /* ======================================================
    4. Ajustes globales menores
    ====================================================== */
 svg {
-  font-family: initial !important;   /* evita heredar IBM Plex Sans */
-  all: unset;                        /* reseteo seguro */
+  font-family: initial !important;
+  all: unset;
 }
 
 /* Animación auxiliar opcional */
 @keyframes subtle-wave {
-  0%, 100%   { clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); }
-  50%        { clip-path: polygon(
-                  0% 0%, 100% 0%, 100% 50%,
-                  75% 100%, 50% 50%, 25% 100%, 0% 50% );
+  0%, 100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 50%,
+      75% 100%, 50% 50%, 25% 100%, 0% 50%
+    );
   }
 }
 .animate-subtle-wave {

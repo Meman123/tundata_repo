@@ -12,11 +12,9 @@ export default function Hero() {
       <div className="w-full flex flex-col items-center gap-20">
         {/* Bloque de texto */}
         <div className="w-full max-w-4xl px-6 sm:px-12 flex flex-col justify-center items-center gap-6 text-center">
-          <h1 className="w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl
-                         text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold
-                         leading-tight lg:leading-snug text-white capitalize">
-            Datos Públicos De <span className="text-[#F39C12]">Duitama</span> Para Todos
-          </h1>
+        <h1 className="w-full max-w-hero-title text-h1 text-text text-center">
+  Datos Públicos de <span className="text-primary">Duitama</span> para Todos
+</h1>
 
           <p className="w-full max-w-xl text-md md:text-md lg:text-lg xl:text-lg font-light
                         leading-relaxed text-gray-200">
