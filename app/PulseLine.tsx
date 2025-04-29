@@ -62,7 +62,7 @@ export default function PulseLine() {
     <div className="w-full max-w-7xl overflow-hidden mx-auto px-2 md:px-3 lg:px-4 xl:px-5">
       <svg
         viewBox={viewBox}
-        preserveAspectRatio="xMinYMid meet"
+        preserveAspectRatio="xMinYMid slice"
         xmlns="http://www.w3.org/2000/svg"
         className="w-full h-auto"
       >
