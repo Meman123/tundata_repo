@@ -4,10 +4,10 @@ import PulseLine from "@/app/PulseLine";
 
 export default function Hero() {
   return (
-    <section className="w-full min-h-[90vh] px-6 sm:px-12 md:px-24 pt-16 pb-10 bg-[#14344B] flex flex-col justify-start items-center overflow-hidden relative">
+    <section className="w-full min-h-[90vh] px-6 sm:px-12 md:px-24 pt-12 pb-10 bg-[#14344B] flex flex-col justify-start items-center overflow-hidden relative">
       
       {/* Contenedor de bloque de texto y PulseLine */}
-      <div className="w-full flex flex-col items-center gap-15">
+      <div className="w-full flex flex-col items-center gap-20">
         
         {/* Bloque de texto */}
         <div className="w-full max-w-4xl px-6 sm:px-12 flex flex-col justify-center items-center gap-8 text-center">

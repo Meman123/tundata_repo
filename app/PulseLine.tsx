@@ -6,36 +6,31 @@ import gsap from "gsap";
 export default function PulseLine() {
   const pulse1Ref = useRef<SVGUseElement>(null);
   const pulse2Ref = useRef<SVGUseElement>(null);
-  const [viewBox, setViewBox] = useState("0 0 1000 250"); // Valor inicial (Desktop)
+  const [viewBox, setViewBox] = useState("0 0 1000 100"); // Desktop base
 
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
 
       if (width < 640) {
-        // 📏 Breakpoint Mobile
-        setViewBox("0 0 500 300"); 
-        // ← Ajusta estos números:
-        //    500 = ancho virtual
-        //    300 = alto virtual (más alto si quieres que se vea más "grande" en mobile)
+        // 📱 Mobile
+        setViewBox("0 0 600 100");
       } else if (width < 1024) {
-        // 📏 Breakpoint Tablet
-        setViewBox("0 0 750 225"); 
-        // ← Ajusta para tablet: más ancho, altura intermedia.
+        // 📱 Tablet
+        setViewBox("0 0 700 100");
       } else {
-        // 📏 Breakpoint Desktop
-        setViewBox("0 0 1000 250"); 
-        // ← Para desktop grande: más ancho, menos alto.
+        // 💻 Laptop y Desktop
+        setViewBox("0 0 1000 100");
       }
     };
 
-    handleResize(); // Ejecutar al montar
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
-    const svgWidth = 6000; // 📏 Ancho total de la línea que animas
+    const svgWidth = 6000;
     const pulse1 = pulse1Ref.current;
     const pulse2 = pulse2Ref.current;
 
@@ -45,14 +40,14 @@ export default function PulseLine() {
 
       gsap.to(pulse1, {
         x: `+=${svgWidth}`,
-        duration: 30, 
+        duration: 40,
         ease: "none",
         repeat: -1,
       });
 
       gsap.to(pulse2, {
         x: `+=${svgWidth}`,
-        duration: 30,
+        duration: 40,
         ease: "none",
         repeat: -1,
       });
@@ -60,20 +55,12 @@ export default function PulseLine() {
   }, []);
 
   return (
-    <div className="w-full overflow-hidden px-2 sm:px-4 md:px-8 lg:px-12">
-      {/* Puedes ajustar px para controlar el aire lateral en cada breakpoint */}
-
+    <div className="w-full max-w-7xl overflow-hidden mx-auto px-2 md:px-3 lg:px-4 xl:px-5">
       <svg
         viewBox={viewBox}
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="xMinYMid meet"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-24 sm:h-28 md:h-32 lg:h-36 xl:h-40"
-        // ← Ajusta las alturas con clases Tailwind:
-        //    h-24: altura pequeña (mobile)
-        //    h-28: altura un poquito más alta (sm)
-        //    h-32: altura tablet
-        //    h-36: altura laptop
-        //    h-40: altura desktop grande
+        className="w-full h-auto"
       >
         <defs>
           <linearGradient id="fadeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -92,15 +79,15 @@ export default function PulseLine() {
             href="/linea2.svg#pulse-path-shape"
             ref={pulse1Ref}
             fill="none"
-            stroke="#F39C12" 
-            strokeWidth="2" 
+            stroke="#F39C12"
+            strokeWidth="2"
             vectorEffect="non-scaling-stroke"
           />
           <use
             href="/linea2.svg#pulse-path-shape"
             ref={pulse2Ref}
             fill="none"
-            stroke="#F39C12" 
+            stroke="#F39C12"
             strokeWidth="2"
             vectorEffect="non-scaling-stroke"
           />
