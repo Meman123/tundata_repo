@@ -5,7 +5,7 @@ import Hero from "../components/Hero";
 
 export default function Home() {
   return (
-    <main className="w-full min-h-screen bg-[#14344B]">
+    <main className="w-full min-h-screen flex flex-col bg-[#14344B] overflow-x-hidden">
       <Header />
       <Hero />
     </main>
