@@ -12,16 +12,13 @@ export default function Hero() {
       <div className="w-full flex flex-col items-center gap-20">
         {/* Bloque de texto */}
         <div className="w-full max-w-4xl px-6 sm:px-12 flex flex-col justify-center items-center gap-6 text-center">
-        <h1 className="w-full max-w-hero-title text-h1 text-text text-center">
-  Datos Públicos de <span className="text-primary">Duitama</span> para Todos
-</h1>
+        <h1 className="text-h1 text-text text-center max-w-4xl">
+          Datos Públicos de <span className="text-primary">Duitama</span> para Todos
+        </h1>
 
-          <p className="w-full max-w-xl text-md md:text-md lg:text-lg xl:text-lg font-light
-                        leading-relaxed text-gray-200">
-            Seguimos, organizamos y compartimos <span className="text-[#F39C12] font-regular">datos públicos</span> de Duitama para
-            impulsar una ciudadanía <span className="text-[#F39C12] font-regular">más informada</span> y promover un gobierno
-            <span className="text-[#F39C12] font-regular"> más transparente</span>.
-          </p>
+        <p className="text-body text-subtle text-center max-w-hero-text">
+          Transformamos <span className="text-primary">datos públicos</span> de Duitama y <span className="text-primary">facilitamos</span> su visualización para impulsar una ciudadanía <span className="text-primary">más informada</span> y promover un gobierno <span className="text-primary">más transparente</span>.
+        </p>
         </div>
 
 
