@@ -46,12 +46,12 @@ const candidates: Candidate[] = [
   {
     name: "Wilfredy Bonilla Lagos",
     party: "Wilfredy Alcalde",
-    img: "/candidatos/wilfredy.png",
+    img: "/Candidatos/wilfredy.png",
   },
   {
     name: "Diego Sandoval Cepeda",
     party: "Fuerza Duitama",
-    img: "/candidatos/Sandoval.png",
+    img: "/Candidatos/Sandoval.png",
   },
 ];
 
