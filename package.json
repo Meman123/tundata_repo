@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "animejs": "^4.0.2",
+    "clsx": "^2.1.1",
     "flubber": "^0.4.2",
     "gsap": "^3.12.7",
     "next": "15.3.1",
