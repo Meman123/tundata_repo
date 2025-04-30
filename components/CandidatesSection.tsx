@@ -21,27 +21,27 @@ const candidates: Candidate[] = [
   {
     name: "Rocío Bernal Mejía",
     party: "Duitama Nuestra Prioridad",
-    img: "/candidatos/rocio.png",
+    img: "/Candidatos/rocio.png",
   },
   {
     name: "Miguel Alberto Vergara",
     party: "Nuevas Ideas Por Duitama",
-    img: "/candidatos/Vergara.png",
+    img: "/Candidatos/Vergara.png",
   },
   {
     name: "Roberto Mayorga Mayorga",
     party: "Alianza Democrática Amplia",
-    img: "/candidatos/Mayorga.png",
+    img: "/Candidatos/Mayorga.png",
   },
   {
     name: "Rafael Antonio Pirajon",
     party: "Centro Democrático",
-    img: "/candidatos/Pirajon.png",
+    img: "/Candidatos/Pirajon.png",
   },
   {
     name: "Alexander Serrato Fonseca",
     party: "Duitama Una Sola Familia",
-    img: "/candidatos/Serrato.png",
+    img: "/Candidatos/Serrato.png",
   },
   {
     name: "Wilfredy Bonilla Lagos",
