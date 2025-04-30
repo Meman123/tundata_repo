@@ -113,7 +113,7 @@ export default function CandidatesSection() {
       </header>
 
       {/* Grid */}
-      <div className="flex flex-wrap justify-center gap-8 px-8 max-w-7xl">
+      <div className="flex flex-wrap justify-center gap-8 px-8 max-w-6xl">
         {candidates.map((c) => (
           <CandidateCard key={c.name} {...c} />
         ))}
