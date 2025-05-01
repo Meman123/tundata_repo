@@ -1,7 +1,11 @@
 import { useEffect, useState, RefObject } from "react";
 
-export function useAvailableViewportHeight<T extends HTMLElement>(
-  ref: RefObject<T>
+/**
+ * Devuelve la altura disponible en viewport menos la altura del ref actual.
+ * El ref puede ser null y se maneja de forma segura.
+ */
+export function useAvailableViewportHeight(
+  ref: RefObject<HTMLElement | null>
 ) {
   const [height, setHeight] = useState("100vh");
 
