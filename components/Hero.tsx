@@ -2,25 +2,28 @@
 
 import PulseLine from "@/app/PulseLine";
 
-export default function Hero() {
+interface HeroProps {
+  height: string;
+}
+
+export default function Hero({ height }: HeroProps) {
   return (
     <section
-      className="w-full min-h-screen px-6 sm:px-12 md:px-24 pt-20 pb-32 bg-background rounded-b-[20px]
-             flex flex-col justify-between items-center overflow-hidden relative"
+      style={{ minHeight: height }}
+      className="w-full px-6 sm:px-12 md:px-24 pt-20 pb-0 bg-background rounded-b-[20px]
+                 flex flex-col justify-between items-center overflow-hidden relative"
     >
       {/* Contenedor de bloque de texto y PulseLine */}
       <div className="w-full flex flex-col items-center gap-20">
         {/* Bloque de texto */}
         <div className="w-full max-w-4xl px-6 sm:px-12 flex flex-col justify-center items-center gap-6 text-center">
-        <h1 className="text-h1 text-text text-center max-w-4xl">
-          Datos Públicos de <span className="text-primary">Duitama</span> para Todos
-        </h1>
-
-        <p className="text-body text-subtle text-center max-w-hero-text">
-          Transformamos <span className="text-primary">datos públicos</span> de Duitama y <span className="text-primary">facilitamos</span> su visualización para impulsar una ciudadanía <span className="text-primary">más informada</span> y promover un gobierno <span className="text-primary">más transparente</span>.
-        </p>
+          <h1 className="text-h1 text-text text-center max-w-4xl">
+            Datos Públicos de <span className="text-primary">Duitama</span> para Todos
+          </h1>
+          <p className="text-body text-subtle text-center max-w-hero-text">
+            Transformamos <span className="text-primary">datos públicos</span> de Duitama y <span className="text-primary">facilitamos</span> su visualización para impulsar una ciudadanía <span className="text-primary">más informada</span> y promover un gobierno <span className="text-primary">más transparente</span>.
+          </p>
         </div>
-
 
         {/* Línea PulseLine */}
         <div className="w-full">

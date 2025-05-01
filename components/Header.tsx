@@ -1,12 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { forwardRef } from "react";
 
-export default function Header() {
+const Header = forwardRef<HTMLDivElement>((_, ref) => {
   return (
     <header
-      className="w-full bg-background flex justify-center items-center
-                 px-6 py-3 overflow-hidden relative z-10 shadow-lg"
+      ref={ref}
+      className="w-full bg-background flex justify-center items-center px-6 py-3 overflow-hidden relative z-10 shadow-lg"
     >
       <Image
         src="/LogoTundata.png"
@@ -18,4 +19,7 @@ export default function Header() {
       />
     </header>
   );
-}
+});
+
+Header.displayName = "Header";
+export default Header;
