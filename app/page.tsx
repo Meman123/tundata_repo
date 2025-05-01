@@ -7,8 +7,9 @@ import CandidatesSection from "../components/CandidatesSection";
 import { useAvailableViewportHeight } from "../hooks/useAvailableViewportHeight";
 
 export default function Home() {
-  const headerRef = useRef<HTMLDivElement>(null);        // ✅
-  const heroHeight = useAvailableViewportHeight<any>(headerRef);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const heroHeight = useAvailableViewportHeight(headerRef);
+  
  // ✅
 
   return (
