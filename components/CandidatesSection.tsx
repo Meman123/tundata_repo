@@ -92,13 +92,13 @@ function CandidateCard({ name, party, img }: Candidate) {
 
 export default function CandidatesSection() {
   return (
-    <section className="w-full bg-[#14344B] py-20 rounded-[45px] flex flex-col items-center gap-16">
+    <section className="w-full bg-[#14344B] py-20 rounded-t-[20px] flex flex-col items-center gap-16">
       {/* Headline */}
       <header className="w-full max-w-6xl px-8 flex flex-col items-center gap-8 text-center">
-        <span className="uppercase text-sm md:text-base font-bold tracking-[0.25em] text-white">
+        <span className="uppercase text-sm md:text-base font-regular tracking-[0.25em] text-white">
           Elecciones Atípicas Duitama 2025
         </span>
-        <h2 className="text-white text-4xl md:text-6xl font-bold leading-none">
+        <h2 className="text-h1 text-white ">
           ¿Quién Quiere <span className="text-primary">Gobernar Duitama</span>?
         </h2>
         <p className="text-white text-xl max-w-3xl">
@@ -112,8 +112,9 @@ export default function CandidatesSection() {
         </p>
       </header>
 
+
       {/* Grid */}
-      <div className="flex flex-wrap justify-center gap-8 px-8 max-w-6xl">
+      <div className="flex flex-wrap justify-center gap-8 px-8 max-w-7xl">
         {candidates.map((c) => (
           <CandidateCard key={c.name} {...c} />
         ))}
