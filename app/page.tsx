@@ -11,11 +11,10 @@ export default function Home() {
   const heroHeight = useAvailableViewportHeight(headerRef);
 
   return (
-    <main className="w-full min-h-screen flex flex-col bg-primary overflow-x-hidden">
+    <main className="w-full min-h-screen flex flex-col bg-Naranja overflow-x-hidden">
       <Header ref={headerRef} />
       <Hero height={heroHeight} />
       <div className="h-1" aria-hidden="true" />
-      <CandidatesSection />
     </main>
   );
 }

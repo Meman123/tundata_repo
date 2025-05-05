@@ -3,77 +3,78 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
 
 /* ======================================================
    1. Variables de diseño (modo claro / modo oscuro)
    ====================================================== */
-:root {
-  /* Colores Tundata */
-  --color-primary: #F39C12;
-  --color-primary-hover: #D88C0A;
-  --color-background: #14344B;
-  --color-text: #FFFFFF;
-  --color-subtle: #E5E7EB;
-
-  /* Tipografía */
-  --fs-h1: clamp(2.25rem, 5vw, 3.5rem); /* igual al diseño funcional */
-  --fs-body: clamp(0.85rem, 1.3vw, 1.1rem);
-  --lh-tight: 1.2;
-  --lh-relaxed: 1.6;
+/* globals.css */
+/* ---------------- Reset básico ---------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html {
+  font-family: 'IBM Plex Sans', sans-serif;
+  line-height: 1.5;
+}
 
-
-/* ======================================================
-   2. Estilos base aplicados al documento
-   ====================================================== */
 body {
-  background: var(--color-background);
-  color: var(--color-text);
-  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+  margin: 0;
+  line-height: normal;
+  background-color: var(--background, #ffffff);
+  color: var(--text, #000000);
+}
+
+/* --------------- Variables CSS --------------- */
+:root {
+
+  /* Fonts */
+  --font-ibm-plex-sans: 'IBM Plex Sans';
+
+  /* Colores */
+  --Azul-Tundata: #14344b;
+  --Naranja-Tundata: #f39c12;
+  --background: #ffffff;
+  --text: #000000;
+
+
+
+  /* Espaciados */
+  --space-xs: 0.01rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 2.5rem;
+
+  /* Breakpoints */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+
+  /* Border radiuses */
+--br-26xl: 45px;
+
+
 }
 
 /* ======================================================
    3. Utilidades personalizadas tipo Tailwind
    ====================================================== */
-@layer utilities {
-  /* Fondos */
-  .bg-primary            { background-color: var(--color-primary); }
-  .bg-background         { background-color: var(--color-background); }
-  .bg-primary-hover      { background-color: var(--color-primary-hover); }
-
-  /* Texto */
-  .text-primary          { color: var(--color-primary); }
-  .text-subtle           { color: var(--color-subtle); }
-
-  /* Hover helpers */
-  .hover\:bg-primary-hover:hover {
-    background-color: var(--color-primary-hover);
-  }
-
-  /* Tipografía */
-  .text-h1 {
-    font-size: var(--fs-h1);
-    line-height: var(--lh-tight);
-    font-weight: 700;
-  }
-
-  .text-body {
-    font-size: var(--fs-body);
-    line-height: var(--lh-relaxed);
-    font-weight: 300;
-  }
-
-  /* Control opcional de ancho (solo si quieres mantenerlo) */
-  .max-w-hero-text {
-    max-width: 36rem;
-  }
-
-  .text-shadow {
-    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.75);
+   @layer utilities {
+    .bg-Naranja {
+      background-color: var(--Naranja-Tundata); /* mejor usar variable */
+    }
   }
   
-}
+/* Aquí podremos añadir resets de tipografías, utilidades y keyframes globales más adelante */
+
+
 
 /* ======================================================
    4. Ajustes globales menores

@@ -1,0 +1,100 @@
+/* === Tailwind base === */
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ======================================================
+   1. Variables de diseño (modo claro / modo oscuro)
+   ====================================================== */
+:root {
+  /* Colores Tundata */
+  --color-primary: #F39C12;
+  --color-primary-hover: #D88C0A;
+  --color-background: #14344B;
+  --color-text: #FFFFFF;
+  --color-subtle: #E5E7EB;
+
+  /* Tipografía */
+  --fs-h1: clamp(2.25rem, 5vw, 3.5rem); /* igual al diseño funcional */
+  --fs-body: clamp(0.85rem, 1.3vw, 1.1rem);
+  --lh-tight: 1.2;
+  --lh-relaxed: 1.6;
+}
+
+
+
+/* ======================================================
+   2. Estilos base aplicados al documento
+   ====================================================== */
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+}
+
+/* ======================================================
+   3. Utilidades personalizadas tipo Tailwind
+   ====================================================== */
+@layer utilities {
+  /* Fondos */
+  .bg-primary            { background-color: var(--color-primary); }
+  .bg-background         { background-color: var(--color-background); }
+  .bg-primary-hover      { background-color: var(--color-primary-hover); }
+
+  /* Texto */
+  .text-primary          { color: var(--color-primary); }
+  .text-subtle           { color: var(--color-subtle); }
+
+  /* Hover helpers */
+  .hover\:bg-primary-hover:hover {
+    background-color: var(--color-primary-hover);
+  }
+
+  /* Tipografía */
+  .text-h1 {
+    font-size: var(--fs-h1);
+    line-height: var(--lh-tight);
+    font-weight: 700;
+  }
+
+  .text-body {
+    font-size: var(--fs-body);
+    line-height: var(--lh-relaxed);
+    font-weight: 300;
+  }
+
+  /* Control opcional de ancho (solo si quieres mantenerlo) */
+  .max-w-hero-text {
+    max-width: 36rem;
+  }
+
+  .text-shadow {
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.75);
+  }
+  
+}
+
+/* ======================================================
+   4. Ajustes globales menores
+   ====================================================== */
+svg {
+  font-family: initial !important;
+  all: unset;
+}
+
+/* Animación auxiliar opcional */
+@keyframes subtle-wave {
+  0%, 100% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 50%,
+      75% 100%, 50% 50%, 25% 100%, 0% 50%
+    );
+  }
+}
+.animate-subtle-wave {
+  animation: subtle-wave 0.6s ease-in-out infinite;
+}

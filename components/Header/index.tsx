@@ -1,18 +1,17 @@
+// components/Header/index.tsx
 import Image from "next/image";
 import { forwardRef } from "react";
+import styles from "./Header.module.css";
 
 const Header = forwardRef<HTMLElement>((_, ref) => (
-  <header
-    ref={ref}
-    className="w-full bg-background flex justify-center items-center px-6 py-3 overflow-hidden relative z-10 shadow-lg"
-  >
+  <header ref={ref} className={styles.header}>
     <Image
       src="/LogoTundata.png"
       alt="Logo de Tundata"
-      width={542}
-      height={142}
+      width={542}   /* valor máximo de placeholder */
+      height={142}  /* mantén proporción original */
       priority
-      className="w-[150px] sm:w-[170px] lg:w-[190px] xl:w-[200px] h-auto object-contain"
+      className={styles.logo}
     />
   </header>
 ));
