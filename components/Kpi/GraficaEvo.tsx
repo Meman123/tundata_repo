@@ -6,7 +6,13 @@ import { Line } from 'react-chartjs-2'
 import rawData from '@/data/evolucionMensual.json'
 import 'chart.js/auto'
 
-const transformarDatosPlano = (dataPlano: any[]) => {
+type EvolucionItem = {
+  mes: string
+  sector_norm: string
+  total: number | string
+}
+
+const transformarDatosPlano = (dataPlano: EvolucionItem[]) => {
   const mesesOrden = ['Jan', 'Feb', 'Mar', 'Apr', 'May']
   const etiquetas = ['Ene', 'Feb', 'Mar', 'Abr', 'May']
 
@@ -16,7 +22,7 @@ const transformarDatosPlano = (dataPlano: any[]) => {
   for (const { mes, sector_norm, total } of dataPlano) {
     const mesKey = mes.trim()
     const sector = sector_norm?.trim()
-    const monto = parseInt(total) / 1_000_000
+    const monto = parseInt(total as string) / 1_000_000
 
     if (!mapaSectorMes[sector]) mapaSectorMes[sector] = {}
     mapaSectorMes[sector][mesKey] = monto
@@ -28,7 +34,7 @@ const transformarDatosPlano = (dataPlano: any[]) => {
       label: sector,
       data: mesesOrden.map(m => Math.round(mapaSectorMes[sector]?.[m] || 0)),
       borderColor: color,
-      color, // 👈 color para usar en el botón
+      color,
       backgroundColor: color,
       tension: 0.3,
       pointRadius: 4,
@@ -41,6 +47,7 @@ const transformarDatosPlano = (dataPlano: any[]) => {
     datasets
   }
 }
+
 
 const GraficaEvolucion = () => {
   const datos = transformarDatosPlano(rawData)
