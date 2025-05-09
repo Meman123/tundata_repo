@@ -4,7 +4,6 @@ import { useRef } from "react";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import { useAvailableViewportHeight } from "../hooks/useAvailableViewportHeight";
-import ContratosPorEntidad from "@/components/ContratosPorEntidad";
 import Frame from "@/components/Kpi/Frame";
 
 

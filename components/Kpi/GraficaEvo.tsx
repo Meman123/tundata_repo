@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import styles from './GraficaEvo.module.css'
 import { Line } from 'react-chartjs-2'
-import type { ScriptableContext } from 'chart.js'
 import rawData from '@/data/evolucionMensual.json'
 import 'chart.js/auto'
 
