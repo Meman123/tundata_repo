@@ -32,17 +32,17 @@ body {
 
 /* --------------- Variables CSS --------------- */
 :root {
-
   /* Fonts */
   --font-ibm-plex-sans: 'IBM Plex Sans';
 
   /* Colores */
   --Azul-Tundata: #14344b;
   --Naranja-Tundata: #f39c12;
+  --color-orange: var(--Naranja-Tundata);
+  --color-white: #ffffff;
+  --Azul-Card-Tundata: #173e59;
   --background: #ffffff;
   --text: #000000;
-
-
 
   /* Espaciados */
   --space-xs: 0.01rem;
@@ -58,10 +58,9 @@ body {
   --bp-xl: 1280px;
 
   /* Border radiuses */
---br-26xl: 45px;
-
-
+  --br-26xl: 45px;
 }
+
 
 /* ======================================================
    3. Utilidades personalizadas tipo Tailwind

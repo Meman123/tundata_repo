@@ -1,0 +1,29 @@
+.radialGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin-top: -16px;
+  }
+  
+  /* Forzar que cada gráfica radial ocupe la misma altura visual */
+  .radialGrid > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 720px; /* Ajusta según el espacio visual ideal */
+    padding-bottom: 40px;
+  }
+  
+  .chartContainerRadial canvas {
+    margin-bottom: 0 !important;
+  }
+  
+
+  @media (max-width: 768px) {
+    .radialGrid > div {
+      min-height: auto;
+    }
+  }
+  

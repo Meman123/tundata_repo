@@ -1,0 +1,42 @@
+[
+    {
+      "sector_norm": "servicio publico",
+      "total_millones": "33765"
+    },
+    {
+      "sector_norm": "trabajo",
+      "total_millones": "8652"
+    },
+    {
+      "sector_norm": "salud y proteccion social",
+      "total_millones": "2365"
+    },
+    {
+      "sector_norm": "agricultura",
+      "total_millones": "1061"
+    },
+    {
+      "sector_norm": "deportes",
+      "total_millones": "644"
+    },
+    {
+      "sector_norm": "industria",
+      "total_millones": "396"
+    },
+    {
+      "sector_norm": "vivienda, ciudad y territorio",
+      "total_millones": "176"
+    },
+    {
+      "sector_norm": "no aplica/no pertenece",
+      "total_millones": "87"
+    },
+    {
+      "sector_norm": "cultura",
+      "total_millones": "74"
+    },
+    {
+      "sector_norm": "ley de justicia",
+      "total_millones": "57"
+    }
+  ]

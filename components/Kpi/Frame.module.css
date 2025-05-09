@@ -1,0 +1,57 @@
+.frameParent {
+    width: 100%;
+    position: relative;
+    border-radius: 45px;
+    background-color: #14344b;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 6%;
+    box-sizing: border-box;
+    gap: 40px;
+    text-align: center;
+  }
+  
+  .headerSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px; /* antes 12px */
+    padding-bottom: 12px;
+  }
+  
+  .title {
+    font-size: clamp(2rem, 5vw, 3rem); /* antes 2.5–4 → ahora más fluido */
+    font-weight: 700;
+    color: #fff;
+    line-height: 115%;
+    text-transform: capitalize;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  
+  .subtitle {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    color: #ffffffcc;
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.6;
+    max-width: 60ch;
+    text-wrap: balance;
+    text-align: center;
+  }
+  
+  .kpiGrid {
+    width: 100%;
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+  
+  @media (max-width: 640px) {
+    .kpiGrid {
+      grid-template-columns: repeat(2, 1fr); /* 2 columnas exactas en móvil */
+      gap: 16px;
+    }
+  }
+  
