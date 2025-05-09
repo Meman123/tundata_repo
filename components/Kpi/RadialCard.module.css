@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
+
+/* CARD PRINCIPAL (Figma) */
+.radial {
+  width: 100%;
+  position: relative;
+  border-radius: 45px;
+  background-color: #173e59;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 30px;
+  box-sizing: border-box;
+  gap: 10px;
+  min-width: 320px;
+  text-align: center;
+  font-size: 55px;
+  color: #fff;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+/* TEXTO ENCABEZADO */
+.radialtextoframe {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.h1Radial {
+  align-self: stretch;
+  position: relative;
+  line-height: 110%;
+  text-transform: capitalize;
+}
+
+.pRadial {
+  align-self: stretch;
+  position: relative;
+  font-size: 20px;
+  line-height: 160%;
+}
+
+/* CONTENEDOR GRÁFICA (cuadrado fluido) */
+.radialplaceholder {
+  align-self: stretch;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+/* FORZAR CANVAS A LLENARLO TODO */
+.radialplaceholder canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* CONTENEDOR DE BOTONES */
+.buttonsplaceholder {
+  align-self: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 0 12px; /* un pequeño padding lateral para móviles */
+}
+
+/* BOTONES DE LEYENDA */
+.legendButton {
+  background: #F48E07;
+  border: none;
+  border-radius: 9999px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.legendButton.disabled {
+  opacity: 0.4;
+}
+
+/* PUNTITO DE COLOR EN CADA BOTÓN */
+.legendDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* AJUSTES PARA MÓVIL */
+@media (max-width: 768px) {
+  .buttonsplaceholder {
+    gap: 6px;
+    margin-top: 12px;
+    padding: 0 8px;
+  }
+  .legendButton {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  .legendDot {
+    width: 10px;
+    height: 10px;
+  }
+}
