@@ -88,7 +88,7 @@ export default function DonutSector() {
       <div className={styles.radialtextoframe}>
         <b className={styles.h1Radial}>Gasto por Sector</b>
         <div className={styles.pRadial}>
-          Participación de cada sector en el gasto total del 2025
+        Visualiza cómo se reparte el gasto público <span className={styles.highlight}>entre los distintos sectores</span>
         </div>
       </div>
 

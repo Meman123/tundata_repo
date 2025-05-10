@@ -18,13 +18,16 @@ const Frame: NextPage = () => {
     <div className={styles.frameParent}>
       <div className={styles.headerSection}>
         <b className={styles.title}>
-          ¿En qué se gasta el dinero público en Duitama?
+          ¿Cómo se gasta el dinero público en <span className={styles.highlight}>Duitama</span>?
         </b>
         <div className={styles.subtitle}>
-          Análisis de contratos firmados en 2025 (Datos SECOP)
+        Estos <span className={styles.highlight}>datos</span> provienen de la base oficial 
+        de contratación estatal <span className={styles.highlight}>(SECOP)</span> y recogen
+        <span className={styles.highlight}> todos los contratos firmados</span> entre el 1 de
+        enero y el 30 de abril de 2025.
         </div>
       </div>
-
+      <div className={styles.divisionLine}></div>
       <div className={styles.kpiGrid}>
         <Kpicard
           value={formatMillones(47277094723)}
@@ -34,24 +37,25 @@ const Frame: NextPage = () => {
         />
         <Kpicard
           value={590}
-          label={<>Contratos en  <span style={{ color: 'var(--Naranja-Tundata)' }}>2025</span></>}
-          description={<> <span style={{ color: 'var(--Naranja-Tundata)' }}>Contratos firmados </span>en el año </>}
+          label={<>Contratos</>}
+          description={<> <span style={{ color: 'var(--Naranja-Tundata)' }}>Contratos</span> a la fecha </>}
           showSymbol={false}
         />
         <Kpicard
           value={formatMillones(3803435028)}
           label={<>Mil Millones <span style={{ color: 'var(--Naranja-Tundata)' }}>(COP)</span></>}
-          description={<>Mayor <span style={{ color: 'var(--Naranja-Tundata)' }}>Contrato</span> Individual</>}
+          description={<><span style={{ color: 'var(--Naranja-Tundata)' }}>Mayor Contrato</span> Individual</>}
           showSymbol={true}
         />
         <Kpicard
-        value="Feb"
-        label={<>242 <span style={{ color: 'var(--Naranja-Tundata)' }}>contratos</span></>}
-        description={<>Mes con más <span style={{ color: 'var(--Naranja-Tundata)' }}>contratos</span></>}
+        value="242"
+        label={<><span style={{ color: 'var(--Naranja-Tundata)' }}>Febrero</span></>}
+        description={<>Mes con <span style={{ color: 'var(--Naranja-Tundata)' }}>más contratos</span></>}
         showSymbol={false}
         />
 
       </div>
+      <div className={styles.divisionLine}></div>
       <GraficaEvolucion />
       <RadialPair />
     </div>

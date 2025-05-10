@@ -38,12 +38,18 @@ body {
   /* Colores */
   --Azul-Tundata: #14344b;
   --Naranja-Tundata: #f39c12;
-  --color-orange: var(--Naranja-Tundata);
-  --color-white: #ffffff;
   --Azul-Card-Tundata: #173e59;
-  --background: #ffffff;
-  --text: #000000;
+  --Azul-Fondo-Card-Tundata: #1e4b68;
 
+
+  /* Tamaños de Letras - Meman */
+  --Hero-h1: clamp(2.5rem, 3.5vw, 4rem);
+  --Hero-p: clamp(1.125rem, 1.25vw, 1.5rem);
+  --Seccion-h1: clamp(2.25rem, 3.5vw, 3.5rem); /* igual al diseño funcional */
+  --Seccion-p: clamp(0.9rem, 2.5vw, 1.1rem);
+
+  --Graph-h1: clamp(1.9rem, 4vw, 3rem);
+  --Graph-p: clamp(0.8rem, 1.7vw, 1rem);
   /* Espaciados */
   --space-xs: 0.01rem;
   --space-sm: 0.5rem;
@@ -68,6 +74,9 @@ body {
    @layer utilities {
     .bg-Naranja {
       background-color: var(--Naranja-Tundata); /* mejor usar variable */
+    }
+    .highlight {
+      color: var(--Naranja-Tundata);
     }
   }
   

@@ -70,9 +70,9 @@ const GraficaEvolucion = () => {
   return (
     <div className={styles.frameParent}>
       <div className={styles.evolucionHeader}>
-        <b className={styles.title}>Evolución Mensual del Gasto (2025)</b>
+        <b className={styles.title}>¿Cómo se distribuye el presupuesto mes a mes?</b>
         <div className={styles.subtitle}>
-          Visualiza el comportamiento mensual del gasto por sector
+        <span className={styles.highlight}>Visualiza</span> cómo varía el <span className={styles.highlight}>gasto por sector</span> a lo largo del año.
         </div>
       </div>
 

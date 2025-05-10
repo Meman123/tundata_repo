@@ -84,7 +84,7 @@ export default function DonutEntidad() {
       <div className={styles.radialtextoframe}>
         <b className={styles.h1Radial}>Gasto por Entidad</b>
         <div className={styles.pRadial}>
-          Distribución del gasto entre las principales entidades en 2025
+        Visualiza cómo se reparte el gasto público <span className={styles.highlight}>entre las distintas entidades</span>
         </div>
       </div>
 

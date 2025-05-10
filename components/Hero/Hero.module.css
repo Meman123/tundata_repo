@@ -37,7 +37,7 @@
   
   /* Título */
   .title {
-    font-size: clamp(2.5rem, 3.5vw, 4rem); /* 40 px → 64 px */
+    font-size: var(--Hero-h1); /* 40 px → 64 px */
     line-height: 1.1;
     font-weight: 700;
     text-transform: capitalize;
@@ -45,7 +45,7 @@
   
   /* Subtítulo / párrafo */
   .subtitle {
-    font-size: clamp(1.125rem, 1.25vw, 1.5rem); /* 18 px → 24 px */
+    font-size: var(--Hero-p); /* 18 px → 24 px */
     line-height: 1.6;
     font-weight: 400;
     max-width: 40rem;               /* ≈ 768 px        */
