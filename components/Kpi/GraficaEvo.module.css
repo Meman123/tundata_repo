@@ -54,28 +54,32 @@
   color: #e0e0e0;
 }
 
-.rectangleParent { /* Contenedor para el gráfico y botones */
+.rectangleParent { /* Contenedor para el gráfico, mensaje pedagógico y botones */
   width: 100%;
   border-radius: 20px;
   background-color: var(--Azul-Fondo-Card-Tundata); /* #1e4b68 */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-md); /* Reducido para más espacio al gráfico */
-  padding: var(--space-md); /* Padding base para este contenedor */
+  /* gap entre .chartInnerNivo, .mensajePedagogico y .botonParent */
+  gap: var(--space-md); /* Ajusta este gap si necesitas más/menos espacio general */
+  padding: var(--space-md);
   box-sizing: border-box;
 }
 
-/* Contenedor específico para el gráfico Nivo */
 .chartInnerNivo {
   width: 100%;
   height: 400px; /* Altura base, se ajusta en media queries */
   border-radius: 10px;
-  padding: 0; /* Sin padding aquí para que Nivo use todo el espacio */
+  padding: 0; 
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Para el espacio debajo de la leyenda "Meses" y antes del mensaje/botones, */
+  /* el 'bottom' margin de Nivo y el 'gap' de '.rectangleParent' son los principales controles. */
+  /* Si se necesita más espacio *solo* debajo del gráfico, se podría añadir un margin-bottom aquí. */
+  /* margin-bottom: var(--space-sm); */
 }
 
 .noDataMessage {
@@ -86,14 +90,29 @@
   padding: var(--space-xl);
 }
 
+/* Estilo para el mensaje pedagógico */
+.mensajePedagogico {
+  font-family: var(--font-ibm-plex-sans);
+  font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  color: #E0E0E0; 
+  text-align: center;
+  padding: var(--space-xs) var(--space-md); /* Padding ligero */
+  margin: 0 auto; /* Centrado si el .rectangleParent es flex */
+  max-width: 90%; 
+  line-height: 1.5;
+  border-radius: 6px;
+  /* background-color: color-mix(in srgb, var(--Azul-Tundata) 20%, transparent); Opcional: fondo muy sutil */
+}
+
+
 .botonParent {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm) var(--space-md);
-  width: 100%; /* Asegurar que ocupe el ancho para centrar bien los botones */
-  margin-top: var(--space-sm);
+  width: 100%; 
   padding: 0 var(--space-xs);
+  margin-top: var(--space-xs); /* Pequeño espacio si viene después del mensaje pedagógico */
 }
 
 .boton {
@@ -120,10 +139,8 @@
 }
 
 .boton.activo {
-  /* backgroundColor y borderColor se aplican inline desde el TSX con el color de la serie */
   font-weight: 700;
-  /* color (texto) también se aplica inline desde el TSX */
-  /* box-shadow: 0 0 10px -2px color-mix(in srgb, var(--Naranja-Tundata) 80%, transparent); */
+  /* backgroundColor, borderColor, y color (texto) se aplican inline desde el TSX */
 }
 
 .colorDot {
@@ -140,45 +157,51 @@
   color: var(--Naranja-Tundata);
 }
 
+
 /* --- AJUSTES ESPECÍFICOS PARA MÓVIL --- */
 
 @media (max-width: 768px) { /* --bp-md (tabletas y móviles grandes) */
   .frameParent {
-    padding: var(--space-lg) var(--space-sm); /* Reducir padding horizontal de la tarjeta principal */
-    border-radius: calc(var(--br-26xl) * 0.8); /* Bordes un poco menos pronunciados */
+    padding: var(--space-lg) var(--space-md);
+    border-radius: calc(var(--br-26xl) * 0.8);
   }
 
   .evolucionHeader {
-    padding-bottom: var(--space-md); /* Menos espacio debajo del header */
+    padding-bottom: var(--space-md);
   }
   
   .title {
-    font-size: clamp(1.7rem, 4.5vw, 2.2rem); /* Título más pequeño */
-    padding: 0 2%; /* Menos padding lateral para el título */
+    font-size: clamp(1.7rem, 4.5vw, 2.2rem);
+    padding: 0 2%;
   }
    .subtitle {
-    font-size: clamp(0.75rem, 2vw, 0.85rem); /* Subtítulo más pequeño */
+    font-size: clamp(0.75rem, 2vw, 0.85rem);
     padding: 0 3%;
   }
 
   .rectangleParent {
-    padding: var(--space-sm) var(--space-xs); /* Padding muy reducido para el contenedor del gráfico y botones */
-    gap: var(--space-sm); /* Menos gap entre gráfico y botones */
+    padding: var(--space-sm); 
+    gap: var(--space-md); /* Ajustar gap para más espacio si es necesario debajo del gráfico */
     border-radius: 15px;
   }
 
   .chartInnerNivo {
-    height: 350px; /* Altura ajustada para tabletas/móviles grandes */
+    height: 350px;
+  }
+
+  .mensajePedagogico {
+    font-size: 0.75rem;
+    padding: var(--space-xs) var(--space-sm);
+    max-width: 100%;
   }
 
   .botonParent {
-    flex-wrap: nowrap; /* Para que no se rompan y permitan scroll */
+    flex-wrap: nowrap;
     overflow-x: auto;
     justify-content: flex-start;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: var(--space-sm) var(--space-sm); /* Padding para que no peguen a los bordes al scrollear */
-    /* Quitar márgenes negativos si el padding del parent ya es pequeño */
+    padding: var(--space-sm) var(--space-sm);
     margin-left: 0; 
     margin-right: 0;
   }
@@ -189,23 +212,24 @@
 
   .boton {
     font-size: clamp(0.75rem, 1.8vw, 0.8rem);
-    padding: calc(var(--space-sm) * 0.8) calc(var(--space-md) * 0.9); /* Padding de botones ligeramente más compacto */
-    scroll-snap-align: start; /* Para el scroll en móvil */
+    padding: calc(var(--space-sm) * 0.8) calc(var(--space-md) * 0.9);
+    scroll-snap-align: start;
   }
 }
 
 
 @media (max-width: 480px) { /* Ajustes más finos para móviles realmente pequeños */
   .frameParent {
-    padding: var(--space-md) var(--space-xs);
+    padding: var(--space-md) var(--space-sm);
     border-radius: calc(var(--br-26xl) * 0.6);
   }
   .rectangleParent {
-    padding: var(--space-xs) 0; /* Casi sin padding horizontal */
+    padding: var(--space-xs);
+    gap: var(--space-sm); /* Gap más pequeño pero presente */
   }
   .chartInnerNivo {
-    height: 300px; /* Aún más compacto */
-    border-radius: 8px; /* Bordes más sutiles en el contenedor interno del gráfico */
+    height: 300px;
+    border-radius: 8px;
   }
   .title {
     font-size: clamp(1.4rem, 5vw, 1.8rem);
@@ -215,7 +239,7 @@
   }
   .boton {
     font-size: clamp(0.7rem, 2vw, 0.75rem);
-    font-weight: 500; /* Un poco menos bold para ahorrar espacio visual */
+    font-weight: 500;
     padding: calc(var(--space-sm) * 0.7) calc(var(--space-md) * 0.7);
   }
   .colorDot {
@@ -225,7 +249,6 @@
   }
 }
 
-
 /* Mantener alturas base para desktop (después de los media queries móviles) */
 @media (min-width: 1024px) { /* --bp-lg */
   .frameParent {
@@ -234,8 +257,107 @@
   }
   .rectangleParent {
     padding: var(--space-lg);
+    gap: var(--space-lg); 
   }
   .chartInnerNivo {
     height: 500px;
   }
+}
+
+
+/* --- ESTILOS PARA EL TOOLTIP MODAL EN MÓVIL --- */
+.mobileTooltipOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.mobileTooltip {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--Azul-Fondo-Card-Tundata, #1e4b68);
+  color: white;
+  padding: var(--space-lg) var(--space-lg) calc(var(--space-lg) * 1.5);
+  border-top: 3px solid var(--Naranja-Tundata);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  font-family: var(--font-ibm-plex-sans);
+  animation: slideUp 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  max-height: 65vh; /* Un poco más de altura si es necesario */
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.6;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mobileTooltipCloseButton {
+  position: absolute;
+  top: calc(var(--space-sm) * 0.5);
+  right: var(--space-md);
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  padding: 0.3rem;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.mobileTooltipCloseButton:hover {
+  color: white;
+}
+
+.mobileTooltipTitle { 
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.mobileTooltipTitle span { /* El chip de color */
+  flex-shrink: 0;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 10px;
+  border-radius: 3px;
+}
+
+.mobileTooltipUnits {
+  font-size: 0.8rem;
+  color: #bdc1c6;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.mobileTooltipInfo {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.mobileTooltipInfo strong {
+  font-weight: 700;
 }
