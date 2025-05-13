@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 // Asegúrate de importar los tipos necesarios si aún los necesitas en otro lugar
-import { ResponsiveLine, Point as NivoPointType } from '@nivo/line';
+import { ResponsiveLine } from '@nivo/line';
 
 type Serie = {
   id: string;
