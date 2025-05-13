@@ -1,193 +1,241 @@
+/* components/GraficaEvo/GraficaEvo.module.css */
+
 .frameParent {
-    width: 100%;
-    border-radius: var(--br-26xl);
-    background-color: var(--Azul-Card-Tundata);
-    padding: 30px 0.5rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 0px;
-    color: var(--color-white);
-    font-family: var(--font-ibm-plex-sans);
+  width: 100%;
+  border-radius: var(--br-26xl); /* 45px */
+  background-color: var(--Azul-Card-Tundata); /* #173e59 */
+  padding: 30px 1rem; /* Padding base */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md); /* 0.75rem */
+  color: #fff;
+  font-family: var(--font-ibm-plex-sans);
+}
+
+/* Ajustes de padding para pantallas más grandes */
+@media (min-width: 768px) { /* --bp-md */
+  .frameParent {
+    padding: 30px var(--space-lg); /* 1rem */
   }
-  
-  @media (min-width: 765px) {
-    .frameParent {
-      padding: 30px 1rem;
-    }
+}
+
+@media (min-width: 1024px) { /* --bp-lg */
+  .frameParent {
+    padding: 40px var(--space-xl); /* 2.5rem */
+    gap: var(--space-lg);
   }
-  
-  @media (min-width: 1440px) {
-    .frameParent {
-      padding: 30px 2rem;
-    }
+}
+
+.evolucionHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+  padding-bottom: var(--space-lg);
+}
+
+.title {
+  font-size: var(--Graph-h1); /* clamp(1.9rem, 4vw, 3rem) */
+  line-height: 1.2;
+  font-weight: 700;
+  text-transform: capitalize;
+  padding: 0 5%;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: var(--Graph-p); /* clamp(0.8rem, 1.7vw, 1rem) */
+  line-height: 1.6;
+  font-family: 'Roboto Mono', monospace;
+  padding: 0 8%;
+  max-width: 65ch;
+  color: #e0e0e0;
+}
+
+.rectangleParent { /* Contenedor para el gráfico y botones */
+  width: 100%;
+  border-radius: 20px;
+  background-color: var(--Azul-Fondo-Card-Tundata); /* #1e4b68 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md); /* Reducido para más espacio al gráfico */
+  padding: var(--space-md); /* Padding base para este contenedor */
+  box-sizing: border-box;
+}
+
+/* Contenedor específico para el gráfico Nivo */
+.chartInnerNivo {
+  width: 100%;
+  height: 400px; /* Altura base, se ajusta en media queries */
+  border-radius: 10px;
+  padding: 0; /* Sin padding aquí para que Nivo use todo el espacio */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.noDataMessage {
+  color: var(--Naranja-Tundata);
+  font-family: var(--font-ibm-plex-sans);
+  font-size: var(--Graph-p);
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.botonParent {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm) var(--space-md);
+  width: 100%; /* Asegurar que ocupe el ancho para centrar bien los botones */
+  margin-top: var(--space-sm);
+  padding: 0 var(--space-xs);
+}
+
+.boton {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--Azul-Tundata) 60%, transparent);
+  color: #e0e0e0;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  line-height: 1.2;
+  font-family: var(--font-ibm-plex-sans);
+  padding: var(--space-sm) var(--space-md);
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  white-space: nowrap;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.boton:not(.activo):hover {
+  background-color: color-mix(in srgb, var(--Naranja-Tundata) 30%, var(--Azul-Tundata) 50%);
+  border-color: color-mix(in srgb, var(--Naranja-Tundata) 70%, transparent);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.boton.activo {
+  /* backgroundColor y borderColor se aplican inline desde el TSX con el color de la serie */
+  font-weight: 700;
+  /* color (texto) también se aplica inline desde el TSX */
+  /* box-shadow: 0 0 10px -2px color-mix(in srgb, var(--Naranja-Tundata) 80%, transparent); */
+}
+
+.colorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: var(--space-sm);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+  vertical-align: middle;
+}
+
+.highlight {
+  color: var(--Naranja-Tundata);
+}
+
+/* --- AJUSTES ESPECÍFICOS PARA MÓVIL --- */
+
+@media (max-width: 768px) { /* --bp-md (tabletas y móviles grandes) */
+  .frameParent {
+    padding: var(--space-lg) var(--space-sm); /* Reducir padding horizontal de la tarjeta principal */
+    border-radius: calc(var(--br-26xl) * 0.8); /* Bordes un poco menos pronunciados */
   }
-  
+
   .evolucionHeader {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    text-align: center;
-    padding-bottom: 20px;
+    padding-bottom: var(--space-md); /* Menos espacio debajo del header */
   }
   
   .title {
-    font-size: var(--Graph-h1);
-    line-height: 110%;
-    text-transform: capitalize;
-    padding: 0 10%;
+    font-size: clamp(1.7rem, 4.5vw, 2.2rem); /* Título más pequeño */
+    padding: 0 2%; /* Menos padding lateral para el título */
   }
-  
-  .subtitle {
-    font-size: var(--Graph-p);
-    line-height: 160%;
-    font-family: 'Roboto Mono', monospace;
-    padding: 0 10%;
+   .subtitle {
+    font-size: clamp(0.75rem, 2vw, 0.85rem); /* Subtítulo más pequeño */
+    padding: 0 3%;
   }
-  
+
   .rectangleParent {
-    width: 100%;
-    border-radius: 25px;
-    background-color: var(--Azul-Card-Tundata);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    padding: 15px 20px;
-    box-sizing: border-box;
-  }
-  
-  .chartWrapper {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-  }
-  
-  .chartInner {
-    min-width: 600px; /* Tamaño mínimo visible en móvil */
-    height: 350px;
-    background-color: var(--Azul-Fondo-Card-Tundata);
+    padding: var(--space-sm) var(--space-xs); /* Padding muy reducido para el contenedor del gráfico y botones */
+    gap: var(--space-sm); /* Menos gap entre gráfico y botones */
     border-radius: 15px;
-    padding: 20px;
-    box-sizing: border-box;
   }
-  
-  @media (min-width: 640px) {
-    .chartInner {
-      height: 400px;
-    }
+
+  .chartInnerNivo {
+    height: 350px; /* Altura ajustada para tabletas/móviles grandes */
   }
-  
-  @media (min-width: 1024px) {
-    .chartInner {
-      height: 500px;
-    }
-  }
-  
-  
+
   .botonParent {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    row-gap: 10px;
-    max-width: 100%;
-    margin-top: 16px;
-    padding: 0 8px;
+    flex-wrap: nowrap; /* Para que no se rompan y permitan scroll */
+    overflow-x: auto;
+    justify-content: flex-start;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-sm) var(--space-sm); /* Padding para que no peguen a los bordes al scrollear */
+    /* Quitar márgenes negativos si el padding del parent ya es pequeño */
+    margin-left: 0; 
+    margin-right: 0;
   }
   
-  @media (max-width: 770px) {
-    .botonParent {
-      overflow-x: auto;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      padding: 0 12px;
-      margin-left: -12px;
-      margin-right: -12px;
-    }
-  
-    .botonParent::-webkit-scrollbar {
-      display: none;
-    }
+  .botonParent::-webkit-scrollbar {
+    display: none;
   }
-  
+
   .boton {
-    border: none;
-    border-radius: 6px;
-    background-color: transparent;
-    color: white;
-    font-size: 15px;
-    line-height: 1.1;
-    font-family: var(--font-ibm-plex-sans);
-    padding: 5px 9px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    scroll-snap-align: start;
-    text-transform: capitalize;
-    opacity: 1;
-    font-weight: 700;
+    font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+    padding: calc(var(--space-sm) * 0.8) calc(var(--space-md) * 0.9); /* Padding de botones ligeramente más compacto */
+    scroll-snap-align: start; /* Para el scroll en móvil */
+  }
+}
 
-  }
 
-  @media (max-width: 770px) {
-    .boton {
-      padding: 4px 8px;
-      font-size: 13px;
-    }
-  
+@media (max-width: 480px) { /* Ajustes más finos para móviles realmente pequeños */
+  .frameParent {
+    padding: var(--space-md) var(--space-xs);
+    border-radius: calc(var(--br-26xl) * 0.6);
   }
-  
-  .boton:hover {
-    opacity: 1;
-    background-color: #c07e13;
+  .rectangleParent {
+    padding: var(--space-xs) 0; /* Casi sin padding horizontal */
   }
-  
-  .activo {
-    background-color: var(--Naranja-Tundata);
-    font-weight: 400;
-    opacity: 1;
-    box-shadow: 0 0 0 2px #fff2 inset;
+  .chartInnerNivo {
+    height: 300px; /* Aún más compacto */
+    border-radius: 8px; /* Bordes más sutiles en el contenedor interno del gráfico */
   }
-  
+  .title {
+    font-size: clamp(1.4rem, 5vw, 1.8rem);
+  }
+   .subtitle {
+    font-size: clamp(0.7rem, 2.2vw, 0.75rem);
+  }
+  .boton {
+    font-size: clamp(0.7rem, 2vw, 0.75rem);
+    font-weight: 500; /* Un poco menos bold para ahorrar espacio visual */
+    padding: calc(var(--space-sm) * 0.7) calc(var(--space-md) * 0.7);
+  }
   .colorDot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-    box-shadow: 0 0 0 1px #fff3;
+    width: 8px;
+    height: 8px;
+    margin-right: calc(var(--space-sm) * 0.7);
   }
+}
 
-  .chartContainerRadial {
-    width: 100%;
-    min-height: 300px;
-    height: auto;
-    margin: 0 auto;
-    display: flex;
-    align-items: stretch;
-    justify-content: center;
-    padding: 1rem;
-    box-sizing: border-box;
-  }
-  
-  
 
-  .chartContainerRadial canvas {
-    width: 100% !important;
-    height: 100% !important;
-    max-width: 100%;
-    display: block;
+/* Mantener alturas base para desktop (después de los media queries móviles) */
+@media (min-width: 1024px) { /* --bp-lg */
+  .frameParent {
+    padding: 40px var(--space-xl); 
+    gap: var(--space-lg);
   }
-  
-  .highlight {
-    color: var(--Naranja-Tundata);
+  .rectangleParent {
+    padding: var(--space-lg);
   }
-  
-  
-  
-  
-  
+  .chartInnerNivo {
+    height: 500px;
+  }
+}

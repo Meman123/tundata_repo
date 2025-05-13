@@ -5,7 +5,8 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import { useAvailableViewportHeight } from "../hooks/useAvailableViewportHeight";
 import Frame from "@/components/Kpi/Frame";
-
+import RinconcitoTundama from "@/components/RinconcitoTundama/RinconcitoTundama";
+import NebulosaTundata from "@/components/NebulosaTundata/NebulosaTundata";
 
 
 
@@ -19,8 +20,8 @@ export default function Home() {
       <Hero height={heroHeight} />
       <div className="h-1" aria-hidden="true" />
       <Frame />
-      
-      
+      <RinconcitoTundama />
+      <NebulosaTundata />
       
     </main>
   );
