@@ -41,12 +41,11 @@
 
 /* TEXTO DESCRIPTIVO */
 .pRadial {
-  align-self: stretch;
-  position: relative;
-  font-size: var(--Graph-p, clamp(0.9rem, 2vw, 1rem));
-  line-height: 160%;
-  font-family: 'IBM Plex Sans', sans-serif;
-  color: var(--color-white, #ffffff);
+  font-size: var(--Graph-p); /* clamp(0.8rem, 1.7vw, 1rem) */
+  line-height: 1.6;
+  font-family: 'Roboto Mono', monospace;
+  padding: 0 8%;
+  color: #e0e0e0;
 }
 
 /* FRASE DESTACADA */
@@ -100,33 +99,38 @@
   .botonParent::-webkit-scrollbar {
     display: none;
   }
+
+
 }
 
 /* BOTÓN INDIVIDUAL */
 .boton {
   border: none;
-  border-radius: 6px;
-  background-color: #ccc;
-  color: #14344b;
-  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  border-radius: 8px;
+  background-color: color-mix(in srgb, var(--Azul-Tundata) 60%, transparent);
+  color: #ffffff;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
   font-family: var(--font-ibm-plex-sans);
-  padding: 6px 10px;
+  padding: var(--space-sm) var(--space-sm);
   font-weight: 500;
   cursor: pointer;
-  text-transform: lowercase;
+  text-transform: capitalize;
   white-space: nowrap;
   display: flex;
   align-items: center;
   gap: 6px;
   scroll-snap-align: start;
-  transition: none;
+  transition: all 0.25s ease-out;
 }
 
-/* BOTÓN ACTIVO */
-.boton.activo {
-  background-color: var(--Naranja-Tundata, #f48e07);
-  color: var(--Azul-Tundata, #14344b);
+@media (max-width: 768px) {
+  .boton {
+    font-size: clamp(0.75rem, 1.8vw, 0.8rem);
+    padding: calc(var(--space-sm) * 0.8) calc(var(--space-md) * 0.9);
+    scroll-snap-align: start;
+  }
 }
+
 
 /* PUNTO DE COLOR */
 .colorDot {

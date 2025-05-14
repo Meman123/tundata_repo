@@ -66,3 +66,33 @@
     }
   }
   
+  /* ---------------- Botón CTA ---------------- */
+.cta {
+  background: transparent;
+  color: var(--color-white);
+  font-size: var(--Hero-p);           /* 18 → 24 px */
+  font-weight: 400;
+  padding: 0.6rem 3rem;
+  border: var(--Naranja-Tundata) solid 1px;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  text-transform: capitalize;
+  font-family: Roboto;
+}
+
+.cta:hover,
+.cta:focus-visible {
+  filter: brightness(0.9);
+  transform: translateY(-2px);
+  background: var(--Naranja-Tundata);
+  transition: background 0.25s ease;
+  
+}
+
+@media (max-width: 640px) {           /* sm */
+  .cta {
+    width: 100%;
+    background: var(--Naranja-Tundata);
+  }
+}

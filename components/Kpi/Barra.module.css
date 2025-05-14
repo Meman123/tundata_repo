@@ -36,10 +36,10 @@
   background: linear-gradient(
     120deg,
     transparent 0%,
-    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.3) 50%,
     transparent 100%
   );
-  animation: shimmer 3s infinite linear;
+  animation: shimmer 4s infinite linear;
   transform: translateX(-100%);
   z-index: 2; /* Above fill color, below valorIzq */
   pointer-events: none;
@@ -99,14 +99,15 @@
   /* Text shadow for readability over both fill and track backgrounds */
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(0,0,0,0.8);
   white-space: nowrap;
+  text-transform: capitalize;
 }
 
 .subtitulo {
   margin-top: 0.6rem;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 16px;
   color: #cbd5e1;
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: 'Roboto Mono', monospace;
   font-weight: 400;
 }
 
@@ -125,8 +126,8 @@
   }
 
   .valorIzq {
-    font-size: 0.75rem;
-    left: 10px; /* Adjust padding for smaller screens */
+    font-size: 0.7rem;
+    left: 5px; /* Adjust padding for smaller screens */
   }
   
   .valorDer {
@@ -135,7 +136,7 @@
   }
 
   .subtitulo {
-    font-size: 0.75rem;
+    font-size: 14px;
     margin-top: 0.5rem;
   }
 }

@@ -15,12 +15,31 @@ import styles from './RadialCard.module.css'
 ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function DonutEntidad() {
-  const chartRef = useRef<Chart<'doughnut', number[], unknown> | null>(null)
-  const [visibility, setVisibility] = useState<boolean[]>([])
+  const INITIAL_VISIBLE_IDX = new Set([0, 1, 2])
 
-  useEffect(() => {
-    setVisibility(rawData.map(() => true))
-  }, [])
+const chartRef = useRef<Chart<'doughnut', number[], unknown> | null>(null)
+
+const [visibility, setVisibility] = useState<boolean[]>(
+  rawData.map((_, i) => INITIAL_VISIBLE_IDX.has(i))
+)
+
+// sincronizar visibilidad inicial en Chart.js
+useEffect(() => {
+  const chart = chartRef.current
+  if (!chart) return
+
+  visibility.forEach((shouldBeVisible, i) => {
+    const isCurrentlyVisible = chart.getDataVisibility(i)
+    if (shouldBeVisible !== isCurrentlyVisible) {
+      chart.toggleDataVisibility(i)
+    }
+  })
+
+  chart.update()
+}, [])
+
+
+
 
   useEffect(() => {
     const onResize = () => chartRef.current?.resize()
@@ -31,19 +50,15 @@ export default function DonutEntidad() {
   const labels = rawData.map(d => d.nombre_entidad_norm)
   const values = rawData.map(d => Number(d.total_millones))
   const total = values.reduce((s, v) => s + v, 0)
-  const colors = [
-  '#f48e07', // index 0 → hsl(39, 89%, 52%) → Naranja Tundata
-  '#3bb1e8', // index 1
-  '#56e8e3', // index 2
-  '#62e88e', // index 3
-  '#b1e83b', // index 4 (desviado para evitar chocar con naranja)
-  '#e8dc3b', // index 5
-  '#e8a03b', // index 6
-  '#e8553b', // index 7
-  '#e83bb6', // index 8
-  '#993be8'  // index 9
-  ]
+function generateNiceColor(index: number, total: number): string {
+  const hueStart = 37;
+  const hueRange = 300;
+  const hue = (hueStart + index * (hueRange / total)) % 360;
+  return `hsl(${hue}, 70%, 55%)`;
+}
 
+  const colors = labels.map((_, i) => generateNiceColor(i, labels.length))
+  
   const data = {
     labels,
     datasets: [{

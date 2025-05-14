@@ -17,7 +17,9 @@ export default function Home() {
       <Header ref={headerRef} />
       <Hero height={heroHeight} />
       <div className="h-1" aria-hidden="true" />
-      <Frame />
+      <section id="datos">
+        <Frame />
+      </section>
       
       
     </main>

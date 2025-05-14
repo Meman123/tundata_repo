@@ -50,7 +50,6 @@
   line-height: 1.6;
   font-family: 'Roboto Mono', monospace;
   padding: 0 8%;
-  max-width: 65ch;
   color: #e0e0e0;
 }
 
@@ -170,14 +169,8 @@
     padding-bottom: var(--space-md);
   }
   
-  .title {
-    font-size: clamp(1.7rem, 4.5vw, 2.2rem);
-    padding: 0 2%;
-  }
-   .subtitle {
-    font-size: clamp(0.75rem, 2vw, 0.85rem);
-    padding: 0 3%;
-  }
+
+
 
   .rectangleParent {
     padding: var(--space-sm); 
@@ -230,12 +223,6 @@
   .chartInnerNivo {
     height: 300px;
     border-radius: 8px;
-  }
-  .title {
-    font-size: clamp(1.4rem, 5vw, 1.8rem);
-  }
-   .subtitle {
-    font-size: clamp(0.7rem, 2.2vw, 0.75rem);
   }
   .boton {
     font-size: clamp(0.7rem, 2vw, 0.75rem);
