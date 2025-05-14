@@ -20,6 +20,16 @@ type NivoSerie = {
   data: { x: string | number; y: number }[];
 };
 
+type CustomTooltipPoint = {
+  id: string;
+  data: {
+    xFormatted: string;
+    yFormatted: string;
+  };
+  seriesId: string;
+  seriesColor: string;
+};
+
 
 type Serie = NivoSerie & { id: string };
 
@@ -183,63 +193,67 @@ const GraficaEvolucionNivo: React.FC = () => {
 
   /* -------------------------------- tooltip ------------------------------- */
 
-  const sliceTooltip = ({ slice }: { slice: { points: PointTooltipDatum[] } }) => {
-    if (!slice.points.length) return null;
-    return (
-      <div
-        style={{
-          background: 'var(--Azul-Fondo-Card-Tundata, #1e4b68)',
-          padding: isMobile ? '6px 10px' : '10px 14px',
-          borderRadius: 6,
-          fontFamily: 'var(--font-ibm-plex-sans)',
-          fontSize: isMobile ? 11 : 13,
-          color: '#fff',
-          boxShadow: '0 3px 9px rgba(0,0,0,.3)',
-          minWidth: isMobile ? 110 : 150,
-        }}
-      >
-        <strong style={{ display: 'block', marginBottom: 6 }}>
-          Mes: {slice.points[0].data.xFormatted}
-        </strong>
-        {slice.points.map(p => (
-          <div key={p.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}>
-            <span
-              style={{
-                width: 10,
-                height: 10,
-                borderRadius: 3,
-                backgroundColor: p.seriesColor,
-                marginRight: 6,
-                flexShrink: 0,
-              }}
-            />
-            <span
-              style={{
-                color: '#e0e0e0',
-                flexShrink: 0,
-                marginRight: 5,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              {p.seriesId}:
-            </span>
-            <strong
-              style={{
-                marginLeft: 'auto',
-                paddingLeft: 8,
-                color: p.seriesColor,
-                whiteSpace: 'nowrap',
-              }}
-            >
-              ${p.data.yFormatted} <span style={{ color: '#cbd5e1', fontWeight: 400 }}>M</span>
-            </strong>
-          </div>
-        ))}
-      </div>
-    );
-  };
+const sliceTooltip = ({ slice }: { slice: { points: CustomTooltipPoint[] } }) => {
+  if (!slice.points.length) return null;
+
+  return (
+    <div
+      style={{
+        background: 'var(--Azul-Fondo-Card-Tundata, #1e4b68)',
+        padding: isMobile ? '6px 10px' : '10px 14px',
+        borderRadius: 6,
+        fontFamily: 'var(--font-ibm-plex-sans)',
+        fontSize: isMobile ? 11 : 13,
+        color: '#fff',
+        boxShadow: '0 3px 9px rgba(0,0,0,.3)',
+        minWidth: isMobile ? 110 : 150,
+      }}
+    >
+      <strong style={{ display: 'block', marginBottom: 6 }}>
+        Mes: {slice.points[0].data.xFormatted}
+      </strong>
+
+      {slice.points.map((p) => (
+        <div key={p.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}>
+          <span
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: 3,
+              backgroundColor: p.seriesColor,
+              marginRight: 6,
+              flexShrink: 0,
+            }}
+          />
+          <span
+            style={{
+              color: '#e0e0e0',
+              flexShrink: 0,
+              marginRight: 5,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {p.seriesId}:
+          </span>
+          <strong
+            style={{
+              marginLeft: 'auto',
+              paddingLeft: 8,
+              color: p.seriesColor,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            ${p.data.yFormatted}{" "}
+            <span style={{ color: '#cbd5e1', fontWeight: 400 }}>M</span>
+          </strong>
+        </div>
+      ))}
+    </div>
+  );
+};
+
 
   /* ---------------------------------- JSX ---------------------------------- */
 
