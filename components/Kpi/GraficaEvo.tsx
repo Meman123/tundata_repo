@@ -214,7 +214,7 @@ const GraficaEvolucionNivo: React.FC = () => {
   /* -------------------------------- tooltip ------------------------------- */
   const sliceTooltip = useCallback(
     // Corrected: Use NivoDatum (type of individual data points) as the generic argument
-    ({ slice }: SliceTooltipProps<NivoDatum>) => {
+    ({ slice }: SliceTooltipProps<Serie>) => {
       if (!slice.points.length) return null;
 
       return (
