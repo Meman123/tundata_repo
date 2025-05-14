@@ -2,7 +2,7 @@
 import type { NextPage } from 'next'
 import styles from './Frame.module.css'
 import Kpicard from './Kpicard'
-import GraficaEvolucion from './GraficaEvo'
+import GraficaLazy from './GraficaLazy'
 import RadialPair from './RadialPair'
 import BarraPresupuesto from './Barra'
 
@@ -58,7 +58,7 @@ const Frame: NextPage = () => {
       </div>
       <BarraPresupuesto gastado={47000} total={274000} />
       <div className={styles.divisionLine}></div>
-      <GraficaEvolucion />
+      <GraficaLazy />
       <RadialPair />
       
 

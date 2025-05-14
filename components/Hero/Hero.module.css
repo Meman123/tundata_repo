@@ -13,12 +13,19 @@
     padding: 75px 30px 2px;
     gap: 0rem;                        /* 80 px  (=20*4) */
   }
+  
+
+  @media (max-width: 640px) {           /* sm */
+    .hero {
+      padding: 40px 20px 2px;
+    }
+  }
 
   .layout {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 7rem; /* o usa var(--space-xl) si prefieres */
+    gap: 4rem; /* o usa var(--space-xl) si prefieres */
     width: 100%;
   }
   
@@ -70,15 +77,15 @@
 .cta {
   background: transparent;
   color: var(--color-white);
-  font-size: var(--Hero-p);           /* 18 → 24 px */
-  font-weight: 400;
+  font-size: var(--Graph-p);           /* 18 → 24 px */
+  font-weight: 300;
   padding: 0.6rem 3rem;
   border: var(--Naranja-Tundata) solid 1px;
   border-radius: 0.75rem;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
   text-transform: capitalize;
-  font-family: Roboto;
+  font-family: var(--font-ibm-plex-sans);
 }
 
 .cta:hover,
@@ -96,3 +103,4 @@
     background: var(--Naranja-Tundata);
   }
 }
+

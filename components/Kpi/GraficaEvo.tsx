@@ -319,7 +319,7 @@ const GraficaEvolucionNivo: React.FC = () => {
               axisLeft={{
                 tickSize: 5,
                 tickPadding: isMobile ? 3 : 5,
-                tickRotation: isMobile && months.length > 5 ? -90 : 0,
+                tickRotation: isMobile ? -90 : 0,
                 legend: isMobile ? 'En Millones (COP)' : 'Gasto En Millones (COP)',
                 legendOffset: axisLeftLegendOffset,
                 legendPosition: 'middle',
