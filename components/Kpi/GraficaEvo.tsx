@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { ResponsiveLine, Serie as NivoSerie } from '@nivo/line';
+import { ResponsiveLine } from '@nivo/line';
+
 import styles from './GraficaEvo.module.css';
 import rawData from '@/data/evolucionMensual.json';
 
@@ -12,6 +13,13 @@ type EvolucionItem = {
   sector_norm: string;
   total: number | string;
 };
+
+type NivoSerie = {
+  id: string;
+  color?: string;
+  data: { x: string | number; y: number }[];
+};
+
 
 type Serie = NivoSerie & { id: string };
 
