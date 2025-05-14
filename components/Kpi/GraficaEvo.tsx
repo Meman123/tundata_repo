@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { ResponsiveLine } from '@nivo/line';
+import { ResponsiveLine, SliceTooltipProps } from "@nivo/line";
+
 
 import styles from './GraficaEvo.module.css';
 import rawData from '@/data/evolucionMensual.json';
@@ -29,6 +30,14 @@ type CustomTooltipPoint = {
   seriesId: string;
   seriesColor: string;
 };
+
+type EvoDatum = {
+  xFormatted: string;
+  yFormatted: string;
+  x: string | number;
+  y: number;
+};
+
 
 
 type Serie = NivoSerie & { id: string };
@@ -193,28 +202,31 @@ const GraficaEvolucionNivo: React.FC = () => {
 
   /* -------------------------------- tooltip ------------------------------- */
 
-const sliceTooltip = ({ slice }: { slice: { points: CustomTooltipPoint[] } }) => {
+const sliceTooltip = ({ slice }: SliceTooltipProps<EvoDatum>) => {
   if (!slice.points.length) return null;
 
   return (
     <div
       style={{
-        background: 'var(--Azul-Fondo-Card-Tundata, #1e4b68)',
-        padding: isMobile ? '6px 10px' : '10px 14px',
+        background: "var(--Azul-Fondo-Card-Tundata, #1e4b68)",
+        padding: isMobile ? "6px 10px" : "10px 14px",
         borderRadius: 6,
-        fontFamily: 'var(--font-ibm-plex-sans)',
+        fontFamily: "var(--font-ibm-plex-sans)",
         fontSize: isMobile ? 11 : 13,
-        color: '#fff',
-        boxShadow: '0 3px 9px rgba(0,0,0,.3)',
+        color: "#fff",
+        boxShadow: "0 3px 9px rgba(0,0,0,.3)",
         minWidth: isMobile ? 110 : 150,
       }}
     >
-      <strong style={{ display: 'block', marginBottom: 6 }}>
+      <strong style={{ display: "block", marginBottom: 6 }}>
         Mes: {slice.points[0].data.xFormatted}
       </strong>
 
-      {slice.points.map((p) => (
-        <div key={p.id} style={{ display: 'flex', alignItems: 'center', marginBottom: 4 }}>
+      {slice.points.map(p => (
+        <div
+          key={p.id}
+          style={{ display: "flex", alignItems: "center", marginBottom: 4 }}
+        >
           <span
             style={{
               width: 10,
@@ -227,32 +239,33 @@ const sliceTooltip = ({ slice }: { slice: { points: CustomTooltipPoint[] } }) =>
           />
           <span
             style={{
-              color: '#e0e0e0',
+              color: "#e0e0e0",
               flexShrink: 0,
               marginRight: 5,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'nowrap',
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
             }}
           >
             {p.seriesId}:
           </span>
           <strong
             style={{
-              marginLeft: 'auto',
+              marginLeft: "auto",
               paddingLeft: 8,
               color: p.seriesColor,
-              whiteSpace: 'nowrap',
+              whiteSpace: "nowrap",
             }}
           >
             ${p.data.yFormatted}{" "}
-            <span style={{ color: '#cbd5e1', fontWeight: 400 }}>M</span>
+            <span style={{ color: "#cbd5e1", fontWeight: 400 }}>M</span>
           </strong>
         </div>
       ))}
     </div>
   );
 };
+
 
 
   /* ---------------------------------- JSX ---------------------------------- */
