@@ -1,21 +1,21 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { PolarArea } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 import {
   Chart as ChartJS,
-  RadialLinearScale,
   ArcElement,
-  Tooltip
+  Tooltip,
+  Legend
 } from 'chart.js'
 import type { Chart, TooltipItem } from 'chart.js'
 import rawData from '@/data/DonutEntidad.json'
 import styles from './RadialCard.module.css'
 
-ChartJS.register(RadialLinearScale, ArcElement, Tooltip)
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 export default function DonutEntidad() {
-  const chartRef = useRef<Chart<'polarArea', number[], unknown> | null>(null)
+  const chartRef = useRef<Chart<'doughnut', number[], unknown> | null>(null)
   const [visibility, setVisibility] = useState<boolean[]>([])
 
   useEffect(() => {
@@ -31,12 +31,23 @@ export default function DonutEntidad() {
   const labels = rawData.map(d => d.nombre_entidad_norm)
   const values = rawData.map(d => Number(d.total_millones))
   const total = values.reduce((s, v) => s + v, 0)
-  const colors = ['#f39c12', '#3498db', '#1abc9c', '#9b59b6', '#e74c3c']
+  const colors = [
+  '#f48e07', // index 0 → hsl(39, 89%, 52%) → Naranja Tundata
+  '#3bb1e8', // index 1
+  '#56e8e3', // index 2
+  '#62e88e', // index 3
+  '#b1e83b', // index 4 (desviado para evitar chocar con naranja)
+  '#e8dc3b', // index 5
+  '#e8a03b', // index 6
+  '#e8553b', // index 7
+  '#e83bb6', // index 8
+  '#993be8'  // index 9
+  ]
 
   const data = {
     labels,
     datasets: [{
-      data: values,
+      data: values.map((v, i) => visibility[i] ? v : 0),
       backgroundColor: colors.slice(0, labels.length),
       borderWidth: 1
     }]
@@ -45,24 +56,31 @@ export default function DonutEntidad() {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    cutout: '60%',
     plugins: {
       legend: { display: false },
       tooltip: {
+        backgroundColor: '#1e4b68',
+        titleFont: {
+          family: 'IBM Plex Sans',
+          size: 13,
+          weight: "bold" as const,
+        },
+        bodyFont: {
+          family: 'IBM Plex Sans',
+          size: 13,
+        },
+        borderColor: '#f48e07',
+        borderWidth: 1,
+        padding: 10,
+        cornerRadius: 6,
         callbacks: {
-          label: (ctx: TooltipItem<'polarArea'>) => {
+          label: (ctx: TooltipItem<'doughnut'>) => {
             const val = Number(ctx.raw)
             const pct = ((val / total) * 100).toFixed(1)
             return `${ctx.label}: $${val.toLocaleString()}M (${pct}%)`
           }
         }
-      }
-    },
-    scales: {
-      r: {
-        grid: { color: '#ffffff22' },
-        angleLines: { color: '#ffffff22' },
-        pointLabels: { color: '#ffffffcc', font: { size: 12, family: 'IBM Plex Sans' } },
-        ticks: { color: '#ffffffcc', font: { size: 12, family: 'IBM Plex Sans' }, backdropColor: 'transparent' }
       }
     }
   }
@@ -84,26 +102,27 @@ export default function DonutEntidad() {
       <div className={styles.radialtextoframe}>
         <b className={styles.h1Radial}>Gasto por Entidad</b>
         <div className={styles.pRadial}>
-        Visualiza cómo se reparte el gasto público <span className={styles.highlight}>entre las distintas entidades</span>
+          Visualiza cómo se reparte el gasto público <span className={styles.highlight}>entre las distintas entidades</span>
         </div>
       </div>
 
       <div className={styles.radialplaceholder}>
-        <PolarArea ref={chartRef} data={data} options={options} />
+        <Doughnut ref={chartRef} data={data} options={options} />
       </div>
 
-      <div className={styles.buttonsplaceholder}>
+      <div className={styles.botonParent}>
         {labels.map((label, i) => (
           <button
             key={i}
-            className={`${styles.legendButton} ${!visibility[i] ? styles.disabled : ''}`}
+            className={`${styles.boton} ${visibility[i] ? styles.activo : ''}`}
             onClick={() => toggle(i)}
+            style={{
+              backgroundColor: visibility[i] ? colors[i] : 'var(--Azul-Tundata)',
+              color: visibility[i] ? 'var(--Azul-Tundata)' : 'white'
+            }}
           >
-            <span
-              className={styles.legendDot}
-              style={{ backgroundColor: colors[i] }}
-            />
-            {label}
+            <span className={styles.colorDot} style={{ backgroundColor: colors[i] }} />
+            {label.toLowerCase()}
           </button>
         ))}
       </div>

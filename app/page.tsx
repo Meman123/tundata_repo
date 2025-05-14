@@ -20,8 +20,7 @@ export default function Home() {
       <Hero height={heroHeight} />
       <div className="h-1" aria-hidden="true" />
       <Frame />
-      <RinconcitoTundama />
-      <NebulosaTundata />
+      
       
     </main>
   );

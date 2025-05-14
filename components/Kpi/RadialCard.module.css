@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;700&display=swap');
 
-/* CARD PRINCIPAL (Figma) */
+/* CONTENEDOR GENERAL DE LA CARD */
 .radial {
   width: 100%;
   position: relative;
@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-/* TEXTO ENCABEZADO */
+/* CONTENEDOR DE TÍTULO + DESCRIPCIÓN */
 .radialtextoframe {
   align-self: stretch;
   display: flex;
@@ -28,34 +28,38 @@
   padding-bottom: 20px;
 }
 
+/* TÍTULO PRINCIPAL */
 .h1Radial {
   align-self: stretch;
   position: relative;
   line-height: 110%;
   text-transform: capitalize;
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: var(--Graph-h1);
-  color: var(--color-white);
+  font-size: var(--Graph-h1, clamp(1.6rem, 3vw, 2.2rem));
+  color: var(--color-white, #ffffff);
 }
 
+/* TEXTO DESCRIPTIVO */
 .pRadial {
   align-self: stretch;
   position: relative;
-  font-size: 20px;
+  font-size: var(--Graph-p, clamp(0.9rem, 2vw, 1rem));
   line-height: 160%;
-
   font-family: 'IBM Plex Sans', sans-serif;
-  font-size: var(--Graph-p);
-  color: var(--color-white);
+  color: var(--color-white, #ffffff);
 }
 
-/* CONTENEDOR GRÁFICA (cuadrado fluido) */
+/* FRASE DESTACADA */
+.highlight {
+  color: var(--Naranja-Tundata, #f48e07);
+}
+
+/* CONTENEDOR DE LA GRÁFICA */
 .radialplaceholder {
   align-self: center;
   width: 70%;
   aspect-ratio: 1;
   overflow: hidden;
-  
 }
 
 @media (max-width: 770px) {
@@ -64,103 +68,71 @@
   }
 }
 
-/* FORZAR CANVAS A LLENARLO TODO */
+/* ASEGURAR QUE EL CANVAS OCUPA TODO EL ESPACIO */
 .radialplaceholder canvas {
   width: 100% !important;
   height: 100% !important;
 }
 
 /* CONTENEDOR DE BOTONES */
-.buttonsplaceholder {
-  /*align-self: stretch;*/
+.botonParent {
   display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    row-gap: 10px;
-    max-width: 100%;
-    margin-top: 16px;
-    padding: 0 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm) var(--space-md);
+  width: 100%; 
+  padding: 0 var(--space-xs);
+  margin-top: var(--space-xs);
 }
 
 @media (max-width: 770px) {
-  .buttonsplaceholder {
-    overflow-x: auto;
+  .botonParent {
     flex-wrap: nowrap;
+    overflow-x: auto;
     justify-content: flex-start;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    padding: 0 1rem;
-    margin-left: -12px;
-    margin-right: -12px;
+    padding: var(--space-sm) var(--space-sm);
+    margin-left: 0; 
+    margin-right: 0;
   }
 
-  .buttonsplaceholder::-webkit-scrollbar {
+  .botonParent::-webkit-scrollbar {
     display: none;
   }
-
 }
 
-/* BOTONES DE LEYENDA */
-.legendButton {
-    border: none;
-    border-radius: 6px;
-    background-color: var(--Naranja-Tundata);
-    color: white;
-    font-size: 15px;
-    line-height: 1.1;
-    font-family: var(--font-ibm-plex-sans);
-    padding: 5px 9px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    scroll-snap-align: start;
-    text-transform: capitalize;
-    opacity: 1;
-    font-weight: 400;
+/* BOTÓN INDIVIDUAL */
+.boton {
+  border: none;
+  border-radius: 6px;
+  background-color: #ccc;
+  color: #14344b;
+  font-size: clamp(0.75rem, 2vw, 0.85rem);
+  font-family: var(--font-ibm-plex-sans);
+  padding: 6px 10px;
+  font-weight: 500;
+  cursor: pointer;
+  text-transform: lowercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  scroll-snap-align: start;
+  transition: none;
 }
 
-@media (max-width: 770px) {
-  .legendButton {
-    padding: 4px 8px;
-    font-size: 13px;
-  }
-
+/* BOTÓN ACTIVO */
+.boton.activo {
+  background-color: var(--Naranja-Tundata, #f48e07);
+  color: var(--Azul-Tundata, #14344b);
 }
 
-.legendButton.disabled {
-  opacity: 1;
-  background-color: transparent;
-  font-weight: 700;
-}
-
-/* PUNTITO DE COLOR EN CADA BOTÓN */
-.legendDot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-    box-shadow: 0 0 0 1px #fff3;
-}
-
-/* AJUSTES PARA MÓVIL */
-@media (max-width: 768px) {
-  .buttonsplaceholder {
-    gap: 6px;
-    margin-top: 12px;
-    padding: 0 8px;
-  }
-  .legendButton {
-    padding: 4px 8px;
-    font-size: 13px;
-  }
-  .legendDot {
-    width: 8px;
-    height: 8px;
-  }
-}
-
-.highlight {
-  color: var(--Naranja-Tundata);
+/* PUNTO DE COLOR */
+.colorDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
