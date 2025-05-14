@@ -1,0 +1,141 @@
+.wrapper {
+  width: 100%;
+  padding: 2rem 0 1rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+.track {
+  width: 100%;
+  height: 40px;
+  background-color: #0f253a;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f48e07, #f7a840);
+  border-radius: inherit; /* Ensure fill inherits border-radius from track */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: width 0.6s ease-out;
+  z-index: 1;
+  overflow: hidden; /* Important for containing valorIzq if fill is small */
+}
+
+.shine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 100%
+  );
+  animation: shimmer 3s infinite linear;
+  transform: translateX(-100%);
+  z-index: 2; /* Above fill color, below valorIzq */
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.valorIzq {
+  position: absolute;
+  left: 14px; /* Padding from the left edge of the fill */
+  top: 50%;
+  transform: translateY(-50%); /* Vertical centering */
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 3; /* Above shine */
+  text-shadow: 0px 0px 3px rgba(0,0,0,0.5); /* Improved contrast */
+}
+
+.valorDer {
+  position: absolute;
+  right: 14px; /* Padding from the right edge of the track */
+  top: 50%;
+  transform: translateY(-50%); /* Vertical centering */
+  font-weight: 600;
+  color: #e0e0e0; /* Good contrast on dark blue track */
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 3; /* Same level as labelCentroWrapper and valorIzq */
+}
+
+.labelCentroWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3; /* Above fill, same level as other labels */
+  pointer-events: none; 
+}
+
+.labelCentro {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #ffffff; /* White text for good base contrast */
+  /* Text shadow for readability over both fill and track backgrounds */
+  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(0,0,0,0.8);
+  white-space: nowrap;
+}
+
+.subtitulo {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+}
+
+.highlight {
+  color: var(--Naranja-Tundata); /* Assuming this CSS variable is defined elsewhere */
+}
+
+/* RESPONSIVO */
+@media (max-width: 640px) {
+  .track {
+    height: 30px;
+  }
+
+  .labelCentro { /* Target the text itself for font size */
+    font-size: 0.75rem;
+  }
+
+  .valorIzq {
+    font-size: 0.75rem;
+    left: 10px; /* Adjust padding for smaller screens */
+  }
+  
+  .valorDer {
+    font-size: 0.75rem;
+    right: 10px; /* Adjust padding for smaller screens */
+  }
+
+  .subtitulo {
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+  }
+}

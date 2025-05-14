@@ -4,6 +4,7 @@ import styles from './Frame.module.css'
 import Kpicard from './Kpicard'
 import GraficaEvolucion from './GraficaEvo'
 import RadialPair from './RadialPair'
+import BarraPresupuesto from './Barra'
 
 function formatMillones(value: number): string {
     const millones = value / 1_000_000
@@ -31,7 +32,7 @@ const Frame: NextPage = () => {
       <div className={styles.kpiGrid}>
         <Kpicard
           value={formatMillones(47277094723)}
-          label={<>Mil Millones <span style={{ color: 'var(--Naranja-Tundata)' }}>(COP))</span></>}
+          label={<>Mil Millones <span style={{ color: 'var(--Naranja-Tundata)' }}>(COP)</span></>}
           description={<>Dinero Público <span style={{ color: 'var(--Naranja-Tundata)' }}>Gastado</span></>}
           showSymbol={true}
         />
@@ -55,9 +56,12 @@ const Frame: NextPage = () => {
         />
 
       </div>
+      <BarraPresupuesto gastado={47000} total={274000} />
       <div className={styles.divisionLine}></div>
       <GraficaEvolucion />
       <RadialPair />
+      
+
     </div>
   )
 }
