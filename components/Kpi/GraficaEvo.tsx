@@ -21,15 +21,6 @@ type NivoSerie = {
   data: { x: string | number; y: number }[];
 };
 
-type CustomTooltipPoint = {
-  id: string;
-  data: {
-    xFormatted: string;
-    yFormatted: string;
-  };
-  seriesId: string;
-  seriesColor: string;
-};
 
 type EvoDatum = {
   xFormatted: string;
