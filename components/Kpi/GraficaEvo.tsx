@@ -3,26 +3,32 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { ResponsiveLine, SliceTooltipProps } from "@nivo/line";
 
-
 import styles from './GraficaEvo.module.css';
-import rawData from '@/data/evolucionMensual.json';
+import rawData from '@/data/evolucionMensual.json'; // Asegúrate que el path alias '@' esté bien configurado
 
 /* ----------------------------- types & helpers ----------------------------- */
 
 type EvolucionItem = {
   mes: string;
   sector_norm: string;
-  total: number | string;
+  total: number | string; // Podría ser string si el JSON tiene números como "1,234.56"
 };
+
+type NivoDatum = { x: string | number; y: number }; // Renombrado para claridad
 
 type NivoSerie = {
   id: string;
   color?: string;
-  data: { x: string | number; y: number }[];
+  data: NivoDatum[];
 };
 
+// El tipo 'Serie' ya era igual a NivoSerie con 'id' siendo obligatorio, lo cual ya es.
+// Si 'color' es siempre asignado, se puede hacer no opcional.
+// Mantendremos 'Serie' si planeas extenderlo de forma diferente a NivoSerie en el futuro.
+type Serie = NivoSerie;
 
-type EvoDatum = {
+
+type EvoPointDatum = { // Tipo para los puntos de datos en el tooltip de Nivo
   xFormatted: string;
   yFormatted: string;
   x: string | number;
@@ -30,46 +36,46 @@ type EvoDatum = {
 };
 
 
-
-type Serie = NivoSerie & { id: string };
-
 const useIsMobile = (breakpointPx = 768): boolean => {
-  const get = () => (typeof window !== 'undefined' ? window.innerWidth < breakpointPx : false);
-  const [isMobile, setIsMobile] = useState(get);
+  const getIsMobile = useCallback(() => (typeof window !== 'undefined' ? window.innerWidth < breakpointPx : false), [breakpointPx]);
+  const [isMobile, setIsMobile] = useState(getIsMobile());
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const handleResize = () => setIsMobile(get());
+
+    const handleResize = () => setIsMobile(getIsMobile());
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [breakpointPx]);
+  }, [getIsMobile, setIsMobile]); // breakpointPx está cubierto por getIsMobile
 
   return isMobile;
 };
 
 const MONTHS = [
-  { key: 'Jan', label: 'Ene' },
-  { key: 'Feb', label: 'Feb' },
-  { key: 'Mar', label: 'Mar' },
-  { key: 'Apr', label: 'Abr' },
-  { key: 'May', label: 'May' },
-  { key: 'Jun', label: 'Jun' },
-  { key: 'Jul', label: 'Jul' },
-  { key: 'Aug', label: 'Ago' },
-  { key: 'Sep', label: 'Sep' },
-  { key: 'Oct', label: 'Oct' },
-  { key: 'Nov', label: 'Nov' },
-  { key: 'Dec', label: 'Dic' },
+  { key: 'Jan', label: 'Ene' }, { key: 'Feb', label: 'Feb' }, { key: 'Mar', label: 'Mar' },
+  { key: 'Apr', label: 'Abr' }, { key: 'May', label: 'May' }, { key: 'Jun', label: 'Jun' },
+  { key: 'Jul', label: 'Jul' }, { key: 'Aug', label: 'Ago' }, { key: 'Sep', label: 'Sep' },
+  { key: 'Oct', label: 'Oct' }, { key: 'Nov', label: 'Nov' }, { key: 'Dec', label: 'Dic' },
 ] as const;
 
 const TUNDATA_HUE = 39;
 
-const colorForSector = (index: number, total: number): string => {
-  if (index === 0) return `hsl(${TUNDATA_HUE}, 89%, 52%)`;
-  const hueStep = 360 / total;
-  const hue = (205 + index * hueStep * 0.8) % 360;
-  const safeHue = Math.abs(hue - TUNDATA_HUE) < 30 ? (hue + 30) % 360 : hue;
-  return `hsl(${safeHue}, 70%, 60%)`;
+const colorForSector = (index: number, totalSectors: number): string => {
+  if (index === 0) return `hsl(${TUNDATA_HUE}, 89%, 52%)`; // Color principal para el primer sector
+  const hueStep = 360 / Math.max(1, totalSectors -1); // Evitar división por cero si solo hay un sector además del principal
+  // Ajustar el inicio del hue para que no colisione inmediatamente con el TUNDATA_HUE
+  const baseHue = (TUNDATA_HUE + 60) % 360; // Empezar desde un ángulo diferente al principal
+  let hue = (baseHue + (index - 1) * hueStep * 0.8) % 360; // (index - 1) porque el index 0 ya tiene color fijo
+
+  // Asegurar una separación mínima del color principal
+  if (Math.abs(hue - TUNDATA_HUE) < 30) {
+    hue = (hue + 30) % 360;
+  }
+  if (Math.abs(hue - TUNDATA_HUE) < 30) { // Chequeo doble por si el ajuste lo acerca de nuevo
+     hue = (TUNDATA_HUE + 180 + 30 ) % 360; // Moverlo al lado opuesto y un poco más
+  }
+
+  return `hsl(${hue}, 70%, 60%)`;
 };
 
 const transformData = (data: EvolucionItem[]) => {
@@ -78,8 +84,10 @@ const transformData = (data: EvolucionItem[]) => {
     monthsPresent.has(m.key.toLowerCase()) ? idx : last
   ), -1);
 
-  const endIdx = lastMonthIdx !== -1 ? lastMonthIdx : MONTHS.findIndex(m => m.key === 'May');
-  const months = MONTHS.slice(0, endIdx + 1);
+  // Si no hay meses en data, usa hasta 'May' por defecto o ajusta según necesites
+  const defaultEndIdx = MONTHS.findIndex(m => m.key === 'May');
+  const endIdx = lastMonthIdx !== -1 ? lastMonthIdx : (defaultEndIdx !== -1 ? defaultEndIdx : MONTHS.length -1) ;
+  const currentMonths = MONTHS.slice(0, endIdx + 1);
 
   const sectors = [...new Set(data.map(d => d.sector_norm.trim()))] as string[];
 
@@ -88,22 +96,24 @@ const transformData = (data: EvolucionItem[]) => {
     return {
       id: sector,
       color,
-      data: months.map(({ key, label }) => {
+      data: currentMonths.map(({ key, label }) => {
         const item = data.find(
           d =>
             d.sector_norm.trim() === sector &&
             d.mes.trim().toLowerCase() === key.toLowerCase(),
         );
+        // Robustecer la conversión numérica
         const rawTotal = item?.total ?? 0;
-        const numeric = parseFloat(String(rawTotal).replace(/,/g, '')) || 0;
-        return { x: label, y: parseFloat((numeric / 1_000_000).toFixed(2)) };
+        const numericTotal = parseFloat(String(rawTotal).replace(/,/g, ''));
+        const yValue = isNaN(numericTotal) ? 0 : parseFloat((numericTotal / 1_000_000).toFixed(2));
+        return { x: label, y: yValue };
       }),
     };
   });
 
   const sectorColors = Object.fromEntries(series.map(s => [s.id, s.color as string]));
 
-  return { series, sectorColors, months } as const;
+  return { series, sectorColors, months: currentMonths } as const;
 };
 
 /* --------------------------------- theme ---------------------------------- */
@@ -144,122 +154,142 @@ const nivoTheme = {
       padding: '8px 12px',
     },
   },
-} as const;
+} as const; // 'as const' es bueno para temas estáticos
 
 /* -------------------------------- component ------------------------------- */
 
 const GraficaEvolucionNivo: React.FC = () => {
   const { series: allSeries, sectorColors, months } = useMemo(
-    () => transformData(rawData as EvolucionItem[]),
-    [],
+    () => transformData(rawData as EvolucionItem[]), //rawData es la dependencia. Si no cambia, esto solo corre una vez.
+    [] // Asegúrate que rawData no cambie entre renders, o inclúyelo como dependencia.
+       // Si rawData es un import estático de JSON, está bien el array vacío.
   );
 
-  const [active, setActive] = useState<string[]>(allSeries.length ? [allSeries[0].id] : []);
+  const [activeSectors, setActiveSectors] = useState<string[]>(() =>
+     allSeries.length > 0 ? [allSeries[0].id] : []
+  );
   const [showHint, setShowHint] = useState(true);
   const isMobile = useIsMobile();
 
   const toggleSector = useCallback(
-    (id: string) => {
-      setActive(prev => {
-        const next = prev.includes(id) ? prev.filter(s => s !== id) : [...prev, id];
-        if (showHint && next.length) setShowHint(false);
-        return next;
+    (sectorId: string) => {
+      setActiveSectors(prevActive => {
+        const nextActive = prevActive.includes(sectorId)
+          ? prevActive.filter(s => s !== sectorId)
+          : [...prevActive, sectorId];
+        if (showHint && nextActive.length > 0) {
+          setShowHint(false);
+        }
+        return nextActive;
       });
     },
-    [showHint],
+    [showHint, setShowHint], // Agregado setShowHint a dependencias de useCallback, aunque no es estrictamente necesario si no se usa en otro efecto.
   );
 
   const displayedSeries = useMemo(
-    () => allSeries.filter(s => active.includes(s.id)),
-    [allSeries, active],
+    () => allSeries.filter(s => activeSectors.includes(s.id)),
+    [allSeries, activeSectors],
   );
 
   /* ---------------------------- layout calculations ---------------------------- */
 
   const tickRotation = isMobile ? (months.length > 4 ? -45 : 0) : months.length > 7 ? -30 : 0;
-  const legendOffsetBottom = isMobile ? (tickRotation ? 65 : 55) : tickRotation ? 70 : 60;
+  const legendOffsetBottom = isMobile ? (tickRotation !== 0 ? 65 : 55) : tickRotation !== 0 ? 70 : 60;
   const axisLeftLegendOffset = isMobile ? -30 : -60;
-  const margins = {
+
+  const margins = useMemo(() => ({ // Memoizar margins si isMobile o legendOffsetBottom cambian
     top: 20,
     right: isMobile ? 10 : 30,
     bottom: legendOffsetBottom + (isMobile ? 20 : 10),
     left: isMobile ? 45 : 70,
-  } as const;
+  }), [isMobile, legendOffsetBottom]);
 
-  const axisBottomLegendText =
+  const axisBottomLegendText = useMemo(() =>
     months.length > 0
       ? `Meses (${months[0].label} - ${months[months.length - 1].label})`
-      : 'Meses';
+      : 'Meses',
+  [months]);
+
+  // Memoizar la función para obtener el color de la serie para Nivo
+  const getSeriesColor = useCallback(
+    (serie: { id: string | number; }) => sectorColors[serie.id as string] || '#ccc',
+    [sectorColors]
+  );
 
   /* -------------------------------- tooltip ------------------------------- */
 
-const sliceTooltip = ({ slice }: SliceTooltipProps<EvoDatum>) => {
-  if (!slice.points.length) return null;
+  const sliceTooltip = useCallback(({ slice }: SliceTooltipProps<EvoPointDatum>) => {
+    if (!slice.points.length) return null;
 
-  return (
-    <div
-      style={{
-        background: "var(--Azul-Fondo-Card-Tundata, #1e4b68)",
-        padding: isMobile ? "6px 10px" : "10px 14px",
-        borderRadius: 6,
-        fontFamily: "var(--font-ibm-plex-sans)",
-        fontSize: isMobile ? 11 : 13,
-        color: "#fff",
-        boxShadow: "0 3px 9px rgba(0,0,0,.3)",
-        minWidth: isMobile ? 110 : 150,
-      }}
-    >
-      <strong style={{ display: "block", marginBottom: 6 }}>
-        Mes: {slice.points[0].data.xFormatted}
-      </strong>
+    return (
+      <div
+        style={{
+          background: "var(--Azul-Fondo-Card-Tundata, #1e4b68)",
+          padding: isMobile ? "6px 10px" : "10px 14px",
+          borderRadius: 6,
+          fontFamily: "var(--font-ibm-plex-sans)",
+          fontSize: isMobile ? 11 : 13,
+          color: "#fff",
+          boxShadow: "0 3px 9px rgba(0,0,0,.3)",
+          minWidth: isMobile ? 110 : 150,
+        }}
+      >
+        <strong style={{ display: "block", marginBottom: 6 }}>
+          Mes: {slice.points[0].data.xFormatted}
+        </strong>
 
-      {slice.points.map(p => (
-        <div
-          key={p.id}
-          style={{ display: "flex", alignItems: "center", marginBottom: 4 }}
-        >
-          <span
-            style={{
-              width: 10,
-              height: 10,
-              borderRadius: 3,
-              backgroundColor: p.seriesColor,
-              marginRight: 6,
-              flexShrink: 0,
-            }}
-          />
-          <span
-            style={{
-              color: "#e0e0e0",
-              flexShrink: 0,
-              marginRight: 5,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "nowrap",
-            }}
+        {slice.points.map(p => (
+          <div
+            key={p.id} // p.id es la combinación de serieId y data.x (ej. "SectorA.Ene")
+            style={{ display: "flex", alignItems: "center", marginBottom: 4 }}
           >
-            {p.seriesId}:
-          </span>
-          <strong
-            style={{
-              marginLeft: "auto",
-              paddingLeft: 8,
-              color: p.seriesColor,
-              whiteSpace: "nowrap",
-            }}
-          >
-            ${p.data.yFormatted}{" "}
-            <span style={{ color: "#cbd5e1", fontWeight: 400 }}>M</span>
-          </strong>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-
+            <span
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 3,
+                backgroundColor: p.seriesColor,
+                marginRight: 6,
+                flexShrink: 0,
+              }}
+            />
+            <span
+              style={{
+                color: "#e0e0e0",
+                flexShrink: 0,
+                marginRight: 5,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                // maxWidth: isMobile ? 60 : 100, // Opcional: para controlar el ancho del nombre del sector
+              }}
+            >
+              {p.seriesId}:
+            </span>
+            <strong
+              style={{
+                marginLeft: "auto",
+                paddingLeft: 8,
+                color: p.seriesColor,
+                whiteSpace: "nowrap",
+              }}
+            >
+              {p.data.yFormatted}{" "} {/* Asumiendo que Nivo formatea el número con '$', si no, agrégalo aquí */}
+              <span style={{ color: "#cbd5e1", fontWeight: 400 }}>M</span>
+            </strong>
+          </div>
+        ))}
+      </div>
+    );
+  }, [isMobile]); // sliceTooltip depende de isMobile para su estilo
 
   /* ---------------------------------- JSX ---------------------------------- */
+
+  if (!allSeries.length && !months.length) {
+      // Podrías mostrar un loader o un mensaje más específico si los datos aún están cargando o son inválidos.
+      // Esto es en caso de que transformData devuelva series o months vacíos por alguna razón en rawData.
+  }
+
 
   return (
     <div className={styles.frameParent}>
@@ -273,15 +303,15 @@ const sliceTooltip = ({ slice }: SliceTooltipProps<EvoDatum>) => {
 
       <div className={styles.rectangleParent}>
         <div className={styles.chartInnerNivo} style={{ height: isMobile ? 400 : 500 }}>
-          {displayedSeries.length ? (
+          {displayedSeries.length > 0 ? (
             <ResponsiveLine
               data={displayedSeries}
               theme={nivoTheme}
-              colors={({ id }: { id: string }) => sectorColors[id]}
+              colors={getSeriesColor} // Usar la función memoizada
               margin={margins}
               xScale={{ type: 'point' }}
               yScale={{ type: 'linear', min: 0, max: 'auto', stacked: false }}
-              yFormat=" >-,.2f"
+              yFormat=" >-,.2f" // Formato para los valores del eje Y y tooltips si no se personaliza más
               curve="monotoneX"
               axisTop={null}
               axisRight={null}
@@ -296,7 +326,7 @@ const sliceTooltip = ({ slice }: SliceTooltipProps<EvoDatum>) => {
               axisLeft={{
                 tickSize: 5,
                 tickPadding: isMobile ? 3 : 5,
-                tickRotation: isMobile ? -90 : 0,
+                tickRotation: isMobile ? (isMobile && months.length > 5 ? -90 : 0) : 0, // Ajuste para rotación en mobile solo si hay muchos meses
                 legend: isMobile ? 'En Millones (COP)' : 'Gasto En Millones (COP)',
                 legendOffset: axisLeftLegendOffset,
                 legendPosition: 'middle',
@@ -305,24 +335,24 @@ const sliceTooltip = ({ slice }: SliceTooltipProps<EvoDatum>) => {
               }}
               lineWidth={isMobile ? 2 : 3}
               pointSize={isMobile ? 4 : 5}
-              pointColor="white"  
-              pointBorderWidth={0}
-              pointBorderColor="#fff"
+              pointColor="white"
+              pointBorderWidth={2} // Generalmente se quiere un borde para que el punto destaque sobre la línea
+              pointBorderColor={{ from: 'serieColor' }} // Borde del color de la serie
               enableArea
-              areaBlendMode="multiply"
+              areaBlendMode="multiply" // Considera 'normal' o 'screen' si 'multiply' es muy oscuro
               areaOpacity={0.15}
-              useMesh
-              enableSlices="x"
-              sliceTooltip={sliceTooltip}
-              legends={[]}
+              useMesh // Bueno para rendimiento con tooltips
+              enableSlices="x" // Habilita tooltips por "slice" en el eje X
+              sliceTooltip={sliceTooltip} // Tooltip personalizado
+              legends={[]} // Deshabilitar leyendas por defecto de Nivo, ya que tienes botones personalizados
               animate
-              motionConfig="slow"
+              motionConfig="slow" // Puedes probar "gentle" o "wobbly" o quitarlo si afecta el rendimiento
             />
           ) : (
             <p className={styles.noDataMessage}>
-              {showHint && allSeries.length
+              {allSeries.length > 0 && activeSectors.length === 0
                 ? 'Usa los botones para activar sectores y ver su evolución.'
-                : 'No hay datos para mostrar.'}
+                : 'No hay datos para mostrar o ningún sector seleccionado.'}
             </p>
           )}
         </div>
@@ -335,30 +365,32 @@ const sliceTooltip = ({ slice }: SliceTooltipProps<EvoDatum>) => {
         </p>
       )}
 
-      <div className={styles.botonParent}>
-        {allSeries.map(serie => {
-          const activeItem = active.includes(serie.id);
-          const color = (serie.color ?? sectorColors[serie.id]) as string;
-          return (
-            <button
-              key={serie.id}
-              className={`${styles.boton} ${activeItem ? styles.activo : ''}`}
-              onClick={() => toggleSector(serie.id)}
-              aria-pressed={activeItem}
-              style={{
-                backgroundColor: activeItem
-                  ? color
-                  : 'color-mix(in srgb, var(--Azul-Tundata, #14344b) 60%, transparent)',
-                color: activeItem ? 'var(--Azul-Tundata, #14344b)' : '#e0e0e0',
-                border: `2px solid ${activeItem ? color : 'transparent'}`,
-              }}
-            >
-              <span className={styles.colorDot} style={{ backgroundColor: color }} />
-              {serie.id}
-            </button>
-          );
-        })}
-      </div>
+      {allSeries.length > 0 && ( // Solo mostrar botones si hay series para elegir
+          <div className={styles.botonParent}>
+            {allSeries.map(serie => {
+              const isActive = activeSectors.includes(serie.id);
+              const color = serie.color || sectorColors[serie.id] || '#ccc'; // Fallback color
+              return (
+                <button
+                  key={serie.id}
+                  className={`${styles.boton} ${isActive ? styles.activo : ''}`}
+                  onClick={() => toggleSector(serie.id)}
+                  aria-pressed={isActive}
+                  style={{
+                    backgroundColor: isActive
+                      ? color
+                      : 'color-mix(in srgb, var(--Azul-Tundata, #14344b) 60%, transparent)',
+                    color: isActive ? 'var(--Azul-Tundata, #14344b)' : '#e0e0e0',
+                    border: `2px solid ${isActive ? color : 'transparent'}`,
+                  }}
+                >
+                  <span className={styles.colorDot} style={{ backgroundColor: color }} />
+                  {serie.id}
+                </button>
+              );
+            })}
+          </div>
+      )}
     </div>
   );
 };
