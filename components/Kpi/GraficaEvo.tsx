@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { ResponsiveLine, PointTooltipDatum, Serie as NivoSerie } from '@nivo/line';
-
+import { ResponsiveLine, Serie as NivoSerie } from '@nivo/line';
 import styles from './GraficaEvo.module.css';
 import rawData from '@/data/evolucionMensual.json';
 
