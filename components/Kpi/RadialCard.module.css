@@ -82,6 +82,13 @@
   width: 100%; 
   padding: 0 var(--space-xs);
   margin-top: var(--space-xs);
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
+  scroll-behavior: smooth;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 770px) {
