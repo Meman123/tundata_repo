@@ -115,9 +115,9 @@ function generateNiceColor(index: number, total: number): string {
   return (
     <div className={styles.radial}>
       <div className={styles.radialtextoframe}>
-        <b className={styles.h1Radial}>Gasto por Entidad</b>
+        <b className={styles.h1Radial}>Top 5 Entidades por Gasto</b>
         <div className={styles.pRadial}>
-          Visualiza cómo se reparte el gasto público <span className={styles.highlight}>entre las distintas entidades</span>
+          Visualiza el ranking de las <span className={styles.highlight}>5 empresas que mas gasto ejecutan</span>
         </div>
       </div>
 

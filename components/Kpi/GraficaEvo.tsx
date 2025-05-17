@@ -290,7 +290,7 @@ const GraficaEvolucionNivo: React.FC = () => {
         <b className={styles.title}>Distribución Presupuestal Mensual</b>
         <p className={styles.subtitle}>
           <span className={styles.highlight}>Visualiza</span> la variación del{' '}
-          <span className={styles.highlight}>gasto por sector</span> a lo largo del año.
+          <span className={styles.highlight}>gasto por sector</span> en lo que va del 2025
         </p>
       </header>
 
