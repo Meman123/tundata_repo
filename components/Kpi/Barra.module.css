@@ -64,7 +64,7 @@
   font-size: 0.85rem;
   white-space: nowrap;
   z-index: 3; /* Above shine */
-  text-shadow: 0px 0px 3px rgba(0,0,0,0.5); /* Improved contrast */
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5); /* Improved contrast */
 }
 
 .valorDer {
@@ -89,7 +89,7 @@
   justify-content: center;
   align-items: center;
   z-index: 3; /* Above fill, same level as other labels */
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 .labelCentro {
@@ -97,7 +97,9 @@
   font-size: 0.9rem;
   color: #ffffff; /* White text for good base contrast */
   /* Text shadow for readability over both fill and track backgrounds */
-  text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.6), 0px 0px 1px rgba(0,0,0,0.8);
+  text-shadow:
+    0px 0px 4px rgba(0, 0, 0, 0.6),
+    0px 0px 1px rgba(0, 0, 0, 0.8);
   white-space: nowrap;
   text-transform: capitalize;
 }
@@ -112,7 +114,9 @@
 }
 
 .highlight {
-  color: var(--Naranja-Tundata); /* Assuming this CSS variable is defined elsewhere */
+  color: var(
+    --Naranja-Tundata
+  ); /* Assuming this CSS variable is defined elsewhere */
 }
 
 /* RESPONSIVO */
@@ -121,7 +125,8 @@
     height: 30px;
   }
 
-  .labelCentro { /* Target the text itself for font size */
+  .labelCentro {
+    /* Target the text itself for font size */
     font-size: 0.75rem;
   }
 
@@ -129,7 +134,7 @@
     font-size: 0.7rem;
     left: 5px; /* Adjust padding for smaller screens */
   }
-  
+
   .valorDer {
     font-size: 0.75rem;
     right: 10px; /* Adjust padding for smaller screens */

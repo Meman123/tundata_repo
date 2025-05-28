@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 
 export default function PulseLine() {
   const pulseA = useRef<SVGUseElement>(null);
   const pulseB = useRef<SVGUseElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const [viewBox, setViewBox] = useState("0 0 900 100");
+  const [viewBox, setViewBox] = useState('0 0 900 100');
 
   useEffect(() => {
     const updateViewBox = () => {
       const w = window.innerWidth;
-      if (w < 425) setViewBox("0 0 300 100");
-      else if (w < 640) setViewBox("0 0 400 100");
-      else if (w < 1024) setViewBox("0 0 600 100");
-      else setViewBox("0 0 900 100");
+      if (w < 425) setViewBox('0 0 300 100');
+      else if (w < 640) setViewBox('0 0 400 100');
+      else if (w < 1024) setViewBox('0 0 600 100');
+      else setViewBox('0 0 900 100');
     };
 
     updateViewBox();
@@ -41,9 +41,15 @@ export default function PulseLine() {
       gsap.set([pulseA.current, pulseB.current], { x: 0 });
       gsap.set(pulseB.current, { x: -width });
 
-      const tl = gsap.timeline({ repeat: -1, defaults: { duration: 40, ease: "none" } });
-      tl.to(pulseA.current, { x: `+=${width}` }, 0)
-        .to(pulseB.current, { x: `+=${width}` }, 0);
+      const tl = gsap.timeline({
+        repeat: -1,
+        defaults: { duration: 40, ease: 'none' },
+      });
+      tl.to(pulseA.current, { x: `+=${width}` }, 0).to(
+        pulseB.current,
+        { x: `+=${width}` },
+        0,
+      );
     };
 
     init();
@@ -76,7 +82,7 @@ export default function PulseLine() {
             href="/linea2.svg#pulse-path-shape"
             ref={pulseA}
             fill="none"
-            stroke="#F39C12"  /* Cambiar a #F48E07 si quieres estandarizar */
+            stroke="#F39C12" /* Cambiar a #F48E07 si quieres estandarizar */
             strokeWidth="1"
             vectorEffect="non-scaling-stroke"
           />

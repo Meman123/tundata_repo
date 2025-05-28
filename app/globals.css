@@ -1,5 +1,5 @@
 /* === Tailwind base === */
-@import "tailwindcss";
+@import 'tailwindcss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -41,7 +41,6 @@ body {
   --Azul-Card-Tundata: #173e59;
   --Azul-Fondo-Card-Tundata: #1e4b68;
 
-
   /* Tamaños de Letras - Meman */
   --Hero-h1: clamp(2.5rem, 3.5vw, 4rem);
   --Hero-p: clamp(1.125rem, 1.25vw, 1.5rem);
@@ -67,22 +66,19 @@ body {
   --br-26xl: 45px;
 }
 
-
 /* ======================================================
    3. Utilidades personalizadas tipo Tailwind
    ====================================================== */
-   @layer utilities {
-    .bg-Naranja {
-      background-color: var(--Naranja-Tundata); /* mejor usar variable */
-    }
-    .highlight {
-      color: var(--Naranja-Tundata);
-    }
+@layer utilities {
+  .bg-Naranja {
+    background-color: var(--Naranja-Tundata); /* mejor usar variable */
   }
-  
+  .highlight {
+    color: var(--Naranja-Tundata);
+  }
+}
+
 /* Aquí podremos añadir resets de tipografías, utilidades y keyframes globales más adelante */
-
-
 
 /* ======================================================
    4. Ajustes globales menores
@@ -94,13 +90,19 @@ svg {
 
 /* Animación auxiliar opcional */
 @keyframes subtle-wave {
-  0%, 100% {
+  0%,
+  100% {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
   50% {
     clip-path: polygon(
-      0% 0%, 100% 0%, 100% 50%,
-      75% 100%, 50% 50%, 25% 100%, 0% 50%
+      0% 0%,
+      100% 0%,
+      100% 50%,
+      75% 100%,
+      50% 50%,
+      25% 100%,
+      0% 50%
     );
   }
 }

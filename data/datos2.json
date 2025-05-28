@@ -1,42 +1,42 @@
 [
-    {
-      "sector": "servicio publico",
-      "total_contratado": "33765483252"
-    },
-    {
-      "sector": "trabajo",
-      "total_contratado": "8652049896"
-    },
-    {
-      "sector": "salud y proteccion social",
-      "total_contratado": "2364869695"
-    },
-    {
-      "sector": "agricultura",
-      "total_contratado": "1060515120"
-    },
-    {
-      "sector": "deportes",
-      "total_contratado": "644187865"
-    },
-    {
-      "sector": "industria",
-      "total_contratado": "395897508"
-    },
-    {
-      "sector": "vivienda, ciudad y territorio",
-      "total_contratado": "176274506"
-    },
-    {
-      "sector": "no aplica/no pertenece",
-      "total_contratado": "87179080"
-    },
-    {
-      "sector": "cultura",
-      "total_contratado": "74112046"
-    },
-    {
-      "sector": "ley de justicia",
-      "total_contratado": "56525755"
-    }
-  ]
+  {
+    "sector": "servicio publico",
+    "total_contratado": "33765483252"
+  },
+  {
+    "sector": "trabajo",
+    "total_contratado": "8652049896"
+  },
+  {
+    "sector": "salud y proteccion social",
+    "total_contratado": "2364869695"
+  },
+  {
+    "sector": "agricultura",
+    "total_contratado": "1060515120"
+  },
+  {
+    "sector": "deportes",
+    "total_contratado": "644187865"
+  },
+  {
+    "sector": "industria",
+    "total_contratado": "395897508"
+  },
+  {
+    "sector": "vivienda, ciudad y territorio",
+    "total_contratado": "176274506"
+  },
+  {
+    "sector": "no aplica/no pertenece",
+    "total_contratado": "87179080"
+  },
+  {
+    "sector": "cultura",
+    "total_contratado": "74112046"
+  },
+  {
+    "sector": "ley de justicia",
+    "total_contratado": "56525755"
+  }
+]

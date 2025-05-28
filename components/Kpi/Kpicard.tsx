@@ -15,7 +15,12 @@ interface KpiCardProps {
   showSymbol?: boolean;
 }
 
-const Kpicard: FC<KpiCardProps> = ({ value, label, description, showSymbol = true }) => {
+const Kpicard: FC<KpiCardProps> = ({
+  value,
+  label,
+  description,
+  showSymbol = true,
+}) => {
   const valueRef = useRef<HTMLSpanElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasAnimated, setHasAnimated] = useState(false);
@@ -38,14 +43,14 @@ const Kpicard: FC<KpiCardProps> = ({ value, label, description, showSymbol = tru
                 },
                 duration: 2,
                 ease: 'power2.out',
-              }
+              },
             );
           }
 
           observer.disconnect(); // solo se anima una vez
         }
       },
-      { threshold: 0.6 } // 60% visible
+      { threshold: 0.6 }, // 60% visible
     );
 
     if (containerRef.current) {

@@ -79,7 +79,7 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm) var(--space-md);
-  width: 100%; 
+  width: 100%;
   padding: 0 var(--space-xs);
   margin-top: var(--space-xs);
 
@@ -99,15 +99,13 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: var(--space-sm) var(--space-sm);
-    margin-left: 0; 
+    margin-left: 0;
     margin-right: 0;
   }
 
   .botonParent::-webkit-scrollbar {
     display: none;
   }
-
-
 }
 
 /* BOTÓN INDIVIDUAL */
@@ -137,7 +135,6 @@
     scroll-snap-align: start;
   }
 }
-
 
 /* PUNTO DE COLOR */
 .colorDot {

@@ -1,75 +1,67 @@
-'use client'
+'use client';
 
-import { useRef, useEffect, useState } from 'react'
-import { Doughnut } from 'react-chartjs-2'
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend
-} from 'chart.js'
-import type { Chart, TooltipItem } from 'chart.js'
-import rawData from '@/data/DonutSector.json'
-import styles from './RadialCard.module.css'
+import { useRef, useEffect, useState } from 'react';
+import { Doughnut } from 'react-chartjs-2';
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import type { Chart, TooltipItem } from 'chart.js';
+import rawData from '@/data/DonutSector.json';
+import styles from './RadialCard.module.css';
 
-ChartJS.register(ArcElement, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function DonutSector() {
-  const INITIAL_VISIBLE_IDX = new Set([0, 1, 2])
+  const INITIAL_VISIBLE_IDX = new Set([0, 1, 2]);
 
-const chartRef = useRef<Chart<'doughnut', number[], unknown> | null>(null)
+  const chartRef = useRef<Chart<'doughnut', number[], unknown> | null>(null);
 
-const [visibility, setVisibility] = useState<boolean[]>(
-  rawData.map((_, i) => INITIAL_VISIBLE_IDX.has(i))
-)
+  const [visibility, setVisibility] = useState<boolean[]>(
+    rawData.map((_, i) => INITIAL_VISIBLE_IDX.has(i)),
+  );
 
-// sincronizar visibilidad inicial en Chart.js
-useEffect(() => {
-  const chart = chartRef.current
-  if (!chart) return
+  // sincronizar visibilidad inicial en Chart.js
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart) return;
 
-  visibility.forEach((shouldBeVisible, i) => {
-    const isCurrentlyVisible = chart.getDataVisibility(i)
-    if (shouldBeVisible !== isCurrentlyVisible) {
-      chart.toggleDataVisibility(i)
-    }
-  })
+    visibility.forEach((shouldBeVisible, i) => {
+      const isCurrentlyVisible = chart.getDataVisibility(i);
+      if (shouldBeVisible !== isCurrentlyVisible) {
+        chart.toggleDataVisibility(i);
+      }
+    });
 
-  chart.update()
-}, [])
-
-
+    chart.update();
+    // Effect depends on the visibility state to re-run when it changes
+  }, [visibility]);
 
   useEffect(() => {
-    const onResize = () => chartRef.current?.resize()
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
+    const onResize = () => chartRef.current?.resize();
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
 
-  const labels = rawData.map(d => d.sector_norm)
-  const values = rawData.map(d => Number(d.total_millones))
-  const total = values.reduce((s, v) => s + v, 0)
-function generateNiceColor(index: number, total: number): string {
-  const hueStart = 37;
-  const hueRange = 300;
-  const hue = (hueStart + index * (hueRange / total)) % 360;
-  return `hsl(${hue}, 70%, 55%)`;
-}
+  const labels = rawData.map((d) => d.sector_norm);
+  const values = rawData.map((d) => Number(d.total_millones));
+  const total = values.reduce((s, v) => s + v, 0);
+  function generateNiceColor(index: number, total: number): string {
+    const hueStart = 37;
+    const hueRange = 300;
+    const hue = (hueStart + index * (hueRange / total)) % 360;
+    return `hsl(${hue}, 70%, 55%)`;
+  }
 
-const colors = labels.map((_, i) => generateNiceColor(i, labels.length));
-
-
-
-  
+  const colors = labels.map((_, i) => generateNiceColor(i, labels.length));
 
   const data = {
     labels,
-    datasets: [{
-      data: values.map((v, i) => visibility[i] ? v : 0),
-      backgroundColor: colors.slice(0, labels.length),
-      borderWidth: 1
-    }]
-  }
+    datasets: [
+      {
+        data: values.map((v, i) => (visibility[i] ? v : 0)),
+        backgroundColor: colors.slice(0, labels.length),
+        borderWidth: 1,
+      },
+    ],
+  };
 
   const options = {
     responsive: true,
@@ -94,38 +86,45 @@ const colors = labels.map((_, i) => generateNiceColor(i, labels.length));
         cornerRadius: 6,
         callbacks: {
           label: (ctx: TooltipItem<'doughnut'>) => {
-            const val = Number(ctx.raw)
-            const pct = ((val / total) * 100).toFixed(1)
-            return `${ctx.label}: $${val.toLocaleString()}M (${pct}%)`
-          }
-        }
-      }
-    }
-  }
+            const val = Number(ctx.raw);
+            const pct = ((val / total) * 100).toFixed(1);
+            return `${ctx.label}: $${val.toLocaleString()}M (${pct}%)`;
+          },
+        },
+      },
+    },
+  };
 
   function toggle(i: number) {
-    const chart = chartRef.current
-    if (!chart) return
-    chart.toggleDataVisibility(i)
-    chart.update()
-    setVisibility(vis => {
-      const next = [...vis]
-      next[i] = !next[i]
-      return next
-    })
+    const chart = chartRef.current;
+    if (!chart) return;
+    chart.toggleDataVisibility(i);
+    chart.update();
+    setVisibility((vis) => {
+      const next = [...vis];
+      next[i] = !next[i];
+      return next;
+    });
   }
 
   return (
     <div className={styles.radial}>
       <div className={styles.radialtextoframe}>
-        <b className={styles.h1Radial}>Gasto por Sector</b>
+        <h3 className={styles.h1Radial}>Gasto por Sector</h3>
         <div className={styles.pRadial}>
-          Visualiza cómo se reparte el gasto público <span className={styles.highlight}>entre los distintos sectores</span>
+          Visualiza cómo se reparte el gasto público{' '}
+          <span className={styles.highlight}>entre los distintos sectores</span>
         </div>
       </div>
 
       <div className={styles.radialplaceholder}>
-        <Doughnut ref={chartRef} data={data} options={options} />
+        <Doughnut
+          ref={chartRef}
+          data={data}
+          options={options}
+          role="img"
+          aria-label="Gráfico de dona: Gasto por Sector"
+        />
       </div>
 
       <div className={styles.botonParent}>
@@ -134,16 +133,22 @@ const colors = labels.map((_, i) => generateNiceColor(i, labels.length));
             key={i}
             className={`${styles.boton} ${visibility[i] ? styles.activo : ''}`}
             onClick={() => toggle(i)}
+            aria-pressed={visibility[i]}
             style={{
-              backgroundColor: visibility[i] ? colors[i] : 'var(--Azul-Tundata)',
-              color: visibility[i] ? 'var(--Azul-Tundata)' : 'white'
+              backgroundColor: visibility[i]
+                ? colors[i]
+                : 'var(--Azul-Tundata)',
+              color: visibility[i] ? 'var(--Azul-Tundata)' : 'white',
             }}
           >
-            <span className={styles.colorDot} style={{ backgroundColor: colors[i] }} />
+            <span
+              className={styles.colorDot}
+              style={{ backgroundColor: colors[i] }}
+            />
             {label.toLowerCase()}
           </button>
         ))}
       </div>
     </div>
-  )
+  );
 }

@@ -14,13 +14,15 @@
 }
 
 /* Ajustes de padding para pantallas más grandes */
-@media (min-width: 768px) { /* --bp-md */
+@media (min-width: 768px) {
+  /* --bp-md */
   .frameParent {
     padding: 30px var(--space-lg); /* 1rem */
   }
 }
 
-@media (min-width: 1024px) { /* --bp-lg */
+@media (min-width: 1024px) {
+  /* --bp-lg */
   .frameParent {
     padding: 40px var(--space-xl); /* 2.5rem */
     gap: var(--space-lg);
@@ -53,7 +55,8 @@
   color: #e0e0e0;
 }
 
-.rectangleParent { /* Contenedor para el gráfico, mensaje pedagógico y botones */
+.rectangleParent {
+  /* Contenedor para el gráfico, mensaje pedagógico y botones */
   width: 100%;
   border-radius: 20px;
   background-color: var(--Azul-Fondo-Card-Tundata); /* #1e4b68 */
@@ -61,7 +64,9 @@
   flex-direction: column;
   align-items: center;
   /* gap entre .chartInnerNivo, .mensajePedagogico y .botonParent */
-  gap: var(--space-md); /* Ajusta este gap si necesitas más/menos espacio general */
+  gap: var(
+    --space-md
+  ); /* Ajusta este gap si necesitas más/menos espacio general */
   padding: var(--space-md);
   box-sizing: border-box;
 }
@@ -70,7 +75,7 @@
   width: 100%;
   height: 400px; /* Altura base, se ajusta en media queries */
   border-radius: 10px;
-  padding: 0; 
+  padding: 0;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -93,25 +98,26 @@
 .mensajePedagogico {
   font-family: var(--font-ibm-plex-sans);
   font-size: clamp(0.8rem, 1.8vw, 0.9rem);
-  color: #E0E0E0; 
+  color: #e0e0e0;
   text-align: center;
   padding: var(--space-xs) var(--space-md); /* Padding ligero */
   margin: 0 auto; /* Centrado si el .rectangleParent es flex */
-  max-width: 90%; 
+  max-width: 90%;
   line-height: 1.5;
   border-radius: 6px;
   /* background-color: color-mix(in srgb, var(--Azul-Tundata) 20%, transparent); Opcional: fondo muy sutil */
 }
-
 
 .botonParent {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--space-sm) var(--space-md);
-  width: 100%; 
+  width: 100%;
   padding: 0 var(--space-xs);
-  margin-top: var(--space-xs); /* Pequeño espacio si viene después del mensaje pedagógico */
+  margin-top: var(
+    --space-xs
+  ); /* Pequeño espacio si viene después del mensaje pedagógico */
 }
 
 .boton {
@@ -131,7 +137,11 @@
 }
 
 .boton:not(.activo):hover {
-  background-color: color-mix(in srgb, var(--Naranja-Tundata) 30%, var(--Azul-Tundata) 50%);
+  background-color: color-mix(
+    in srgb,
+    var(--Naranja-Tundata) 30%,
+    var(--Azul-Tundata) 50%
+  );
   border-color: color-mix(in srgb, var(--Naranja-Tundata) 70%, transparent);
   color: #fff;
   transform: translateY(-1px);
@@ -148,7 +158,7 @@
   border-radius: 50%;
   display: inline-block;
   margin-right: var(--space-sm);
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.3);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
   vertical-align: middle;
 }
 
@@ -156,10 +166,10 @@
   color: var(--Naranja-Tundata);
 }
 
-
 /* --- AJUSTES ESPECÍFICOS PARA MÓVIL --- */
 
-@media (max-width: 768px) { /* --bp-md (tabletas y móviles grandes) */
+@media (max-width: 768px) {
+  /* --bp-md (tabletas y móviles grandes) */
   .frameParent {
     padding: var(--space-lg) var(--space-md);
     border-radius: calc(var(--br-26xl) * 0.8);
@@ -168,13 +178,12 @@
   .evolucionHeader {
     padding-bottom: var(--space-md);
   }
-  
-
-
 
   .rectangleParent {
-    padding: var(--space-sm); 
-    gap: var(--space-md); /* Ajustar gap para más espacio si es necesario debajo del gráfico */
+    padding: var(--space-sm);
+    gap: var(
+      --space-md
+    ); /* Ajustar gap para más espacio si es necesario debajo del gráfico */
     border-radius: 15px;
   }
 
@@ -195,10 +204,10 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding: var(--space-sm) var(--space-sm);
-    margin-left: 0; 
+    margin-left: 0;
     margin-right: 0;
   }
-  
+
   .botonParent::-webkit-scrollbar {
     display: none;
   }
@@ -210,8 +219,8 @@
   }
 }
 
-
-@media (max-width: 480px) { /* Ajustes más finos para móviles realmente pequeños */
+@media (max-width: 480px) {
+  /* Ajustes más finos para móviles realmente pequeños */
   .frameParent {
     padding: var(--space-md) var(--space-sm);
     border-radius: calc(var(--br-26xl) * 0.6);
@@ -237,20 +246,20 @@
 }
 
 /* Mantener alturas base para desktop (después de los media queries móviles) */
-@media (min-width: 1024px) { /* --bp-lg */
+@media (min-width: 1024px) {
+  /* --bp-lg */
   .frameParent {
-    padding: 40px var(--space-xl); 
+    padding: 40px var(--space-xl);
     gap: var(--space-lg);
   }
   .rectangleParent {
     padding: var(--space-lg);
-    gap: var(--space-lg); 
+    gap: var(--space-lg);
   }
   .chartInnerNivo {
     height: 500px;
   }
 }
-
 
 /* --- ESTILOS PARA EL TOOLTIP MODAL EN MÓVIL --- */
 .mobileTooltipOverlay {
@@ -315,7 +324,7 @@
   color: white;
 }
 
-.mobileTooltipTitle { 
+.mobileTooltipTitle {
   display: flex;
   align-items: center;
   margin-bottom: var(--space-md);
@@ -323,7 +332,8 @@
   font-weight: 700;
 }
 
-.mobileTooltipTitle span { /* El chip de color */
+.mobileTooltipTitle span {
+  /* El chip de color */
   flex-shrink: 0;
   display: inline-block;
   width: 14px;

@@ -1,22 +1,22 @@
 [
-    {
-      "nombre_entidad_norm": "municipio de duitama",
-      "total_millones": "33709"
-    },
-    {
-      "nombre_entidad_norm": "sena - boyacá",
-      "total_millones": "8652"
-    },
-    {
-      "nombre_entidad_norm": "hospital - duitama",
-      "total_millones": "2365"
-    },
-    {
-      "nombre_entidad_norm": "ica",
-      "total_millones": "1061"
-    },
-    {
-      "nombre_entidad_norm": "IERD",
-      "total_millones": "644"
-    }
-  ]
+  {
+    "nombre_entidad_norm": "municipio de duitama",
+    "total_millones": "33709"
+  },
+  {
+    "nombre_entidad_norm": "sena - boyacá",
+    "total_millones": "8652"
+  },
+  {
+    "nombre_entidad_norm": "hospital - duitama",
+    "total_millones": "2365"
+  },
+  {
+    "nombre_entidad_norm": "ica",
+    "total_millones": "1061"
+  },
+  {
+    "nombre_entidad_norm": "IERD",
+    "total_millones": "644"
+  }
+]

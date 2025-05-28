@@ -1,5 +1,5 @@
 /* === Tailwind base === */
-@import "tailwindcss";
+@import 'tailwindcss';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,11 +9,11 @@
    ====================================================== */
 :root {
   /* Colores Tundata */
-  --color-primary: #F39C12;
-  --color-primary-hover: #D88C0A;
-  --color-background: #14344B;
-  --color-text: #FFFFFF;
-  --color-subtle: #E5E7EB;
+  --color-primary: #f39c12;
+  --color-primary-hover: #d88c0a;
+  --color-background: #14344b;
+  --color-text: #ffffff;
+  --color-subtle: #e5e7eb;
 
   /* Tipografía */
   --fs-h1: clamp(2.25rem, 5vw, 3.5rem); /* igual al diseño funcional */
@@ -22,15 +22,13 @@
   --lh-relaxed: 1.6;
 }
 
-
-
 /* ======================================================
    2. Estilos base aplicados al documento
    ====================================================== */
 body {
   background: var(--color-background);
   color: var(--color-text);
-  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+  font-family: 'IBM Plex Sans', Arial, Helvetica, sans-serif;
 }
 
 /* ======================================================
@@ -38,13 +36,23 @@ body {
    ====================================================== */
 @layer utilities {
   /* Fondos */
-  .bg-primary            { background-color: var(--color-primary); }
-  .bg-background         { background-color: var(--color-background); }
-  .bg-primary-hover      { background-color: var(--color-primary-hover); }
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-background {
+    background-color: var(--color-background);
+  }
+  .bg-primary-hover {
+    background-color: var(--color-primary-hover);
+  }
 
   /* Texto */
-  .text-primary          { color: var(--color-primary); }
-  .text-subtle           { color: var(--color-subtle); }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .text-subtle {
+    color: var(--color-subtle);
+  }
 
   /* Hover helpers */
   .hover\:bg-primary-hover:hover {
@@ -72,7 +80,6 @@ body {
   .text-shadow {
     text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.75);
   }
-  
 }
 
 /* ======================================================
@@ -85,13 +92,19 @@ svg {
 
 /* Animación auxiliar opcional */
 @keyframes subtle-wave {
-  0%, 100% {
+  0%,
+  100% {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
   50% {
     clip-path: polygon(
-      0% 0%, 100% 0%, 100% 50%,
-      75% 100%, 50% 50%, 25% 100%, 0% 50%
+      0% 0%,
+      100% 0%,
+      100% 50%,
+      75% 100%,
+      50% 50%,
+      25% 100%,
+      0% 50%
     );
   }
 }

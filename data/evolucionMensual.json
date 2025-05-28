@@ -1,152 +1,152 @@
 [
-    {
-      "mes": "Apr",
-      "sector_norm": "agricultura",
-      "total": "290515520"
-    },
-    {
-      "mes": "Apr",
-      "sector_norm": "deportes",
-      "total": "144317530"
-    },
-    {
-      "mes": "Apr",
-      "sector_norm": "salud y proteccion social",
-      "total": "2364869695"
-    },
-    {
-      "mes": "Apr",
-      "sector_norm": "servicio publico",
-      "total": "6963845540"
-    },
-    {
-      "mes": "Apr",
-      "sector_norm": "trabajo",
-      "total": "39249161"
-    },
-    {
-      "mes": "Apr",
-      "sector_norm": "vivienda, ciudad y territorio",
-      "total": "2449405"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "cultura",
-      "total": "43433815"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "deportes",
-      "total": "18490000"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "industria",
-      "total": "246299226"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "ley de justicia",
-      "total": "43378555"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "no aplica",
-      "total": "10200000"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "servicio publico",
-      "total": "5906543080"
-    },
-    {
-      "mes": "Feb",
-      "sector_norm": "trabajo",
-      "total": "5105598540"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "agricultura",
-      "total": "188511500"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "cultura",
-      "total": "30678231"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "deportes",
-      "total": "229719560"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "industria",
-      "total": "149598281"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "no aplica",
-      "total": "49942000"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "servicio publico",
-      "total": "9261034687"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "trabajo",
-      "total": "3208574604"
-    },
-    {
-      "mes": "Jan",
-      "sector_norm": "vivienda, ciudad y territorio",
-      "total": "100395741"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "agricultura",
-      "total": "581488100"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "deportes",
-      "total": "251660775"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "industria",
-      "total": "1"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "ley de justicia",
-      "total": "13147200"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "no aplica",
-      "total": "27037080"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "servicio publico",
-      "total": "11253076485"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "trabajo",
-      "total": "298627591"
-    },
-    {
-      "mes": "Mar",
-      "sector_norm": "vivienda, ciudad y territorio",
-      "total": "73429360"
-    },
-    {
-      "mes": "May",
-      "sector_norm": "servicio publico",
-      "total": "380983460"
-    }
-  ]
+  {
+    "mes": "Apr",
+    "sector_norm": "agricultura",
+    "total": "290515520"
+  },
+  {
+    "mes": "Apr",
+    "sector_norm": "deportes",
+    "total": "144317530"
+  },
+  {
+    "mes": "Apr",
+    "sector_norm": "salud y proteccion social",
+    "total": "2364869695"
+  },
+  {
+    "mes": "Apr",
+    "sector_norm": "servicio publico",
+    "total": "6963845540"
+  },
+  {
+    "mes": "Apr",
+    "sector_norm": "trabajo",
+    "total": "39249161"
+  },
+  {
+    "mes": "Apr",
+    "sector_norm": "vivienda, ciudad y territorio",
+    "total": "2449405"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "cultura",
+    "total": "43433815"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "deportes",
+    "total": "18490000"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "industria",
+    "total": "246299226"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "ley de justicia",
+    "total": "43378555"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "no aplica",
+    "total": "10200000"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "servicio publico",
+    "total": "5906543080"
+  },
+  {
+    "mes": "Feb",
+    "sector_norm": "trabajo",
+    "total": "5105598540"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "agricultura",
+    "total": "188511500"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "cultura",
+    "total": "30678231"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "deportes",
+    "total": "229719560"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "industria",
+    "total": "149598281"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "no aplica",
+    "total": "49942000"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "servicio publico",
+    "total": "9261034687"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "trabajo",
+    "total": "3208574604"
+  },
+  {
+    "mes": "Jan",
+    "sector_norm": "vivienda, ciudad y territorio",
+    "total": "100395741"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "agricultura",
+    "total": "581488100"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "deportes",
+    "total": "251660775"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "industria",
+    "total": "1"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "ley de justicia",
+    "total": "13147200"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "no aplica",
+    "total": "27037080"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "servicio publico",
+    "total": "11253076485"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "trabajo",
+    "total": "298627591"
+  },
+  {
+    "mes": "Mar",
+    "sector_norm": "vivienda, ciudad y territorio",
+    "total": "73429360"
+  },
+  {
+    "mes": "May",
+    "sector_norm": "servicio publico",
+    "total": "380983460"
+  }
+]

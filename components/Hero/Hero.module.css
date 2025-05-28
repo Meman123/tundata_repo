@@ -1,89 +1,90 @@
 /* Contenedor principal del hero */
 .hero {
-    width: 100%;
-    /* altura mínima dinámica → la fija inline React            */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    overflow: hidden;
-    position: relative;
-    background: var(--Azul-Tundata);
-    border-radius: 0 0 var(--br-26xl) var(--br-26xl);
-    padding: 75px 30px 2px;
-    gap: 0rem;                        /* 80 px  (=20*4) */
-  }
-  
+  width: 100%;
+  /* altura mínima dinámica → la fija inline React            */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  background: var(--Azul-Tundata);
+  border-radius: 0 0 var(--br-26xl) var(--br-26xl);
+  padding: 75px 30px 2px;
+  gap: 0rem; /* 80 px  (=20*4) */
+}
 
-  @media (max-width: 640px) {           /* sm */
-    .hero {
-      padding: 40px 20px 2px;
-    }
+@media (max-width: 640px) {
+  /* sm */
+  .hero {
+    padding: 40px 20px 2px;
   }
+}
 
-  .layout {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4rem; /* o usa var(--space-xl) si prefieres */
-    width: 100%;
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rem; /* o usa var(--space-xl) si prefieres */
+  width: 100%;
+}
+
+/* Bloque de texto centrado */
+.text {
+  width: 100%;
+  max-width: 40rem; /* ≈ 1024 px      */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  text-align: center;
+  color: var(--color-white);
+}
+
+/* Título */
+.title {
+  font-size: var(--Hero-h1); /* 40 px → 64 px */
+  line-height: 1.1;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+/* Subtítulo / párrafo */
+.subtitle {
+  font-size: var(--Hero-p); /* 18 px → 24 px */
+  line-height: 1.6;
+  font-weight: 400;
+  max-width: 40rem; /* ≈ 768 px        */
+}
+
+/* Palabras resaltadas en naranja */
+.highlight {
+  color: var(--Naranja-Tundata);
+}
+
+/* —— Breakpoints específicos (si necesitas espaciar más) —— */
+@media (min-width: 1024px) {
+  /* ≥ lg */
+  .hero {
+    gap: 6rem; /* 96 px */
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
   }
-  
-  
-  /* Bloque de texto centrado */
-  .text {
-    width: 100%;
-    max-width: 40rem;                 /* ≈ 1024 px      */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    text-align: center;
-    color: var(--color-white);
-  }
-  
-  /* Título */
-  .title {
-    font-size: var(--Hero-h1); /* 40 px → 64 px */
-    line-height: 1.1;
-    font-weight: 700;
-    text-transform: capitalize;
-  }
-  
-  /* Subtítulo / párrafo */
-  .subtitle {
-    font-size: var(--Hero-p); /* 18 px → 24 px */
-    line-height: 1.6;
-    font-weight: 400;
-    max-width: 40rem;               /* ≈ 768 px        */
-  }
-  
-  /* Palabras resaltadas en naranja */
-  .highlight {
-    color: var(--Naranja-Tundata);
-  }
-  
-  
-  /* —— Breakpoints específicos (si necesitas espaciar más) —— */
-  @media (min-width: 1024px) {       /* ≥ lg */
-    .hero {
-      gap: 6rem;                     /* 96 px */
-      padding-left: var(--space-xl);
-      padding-right: var(--space-xl);
-    }
-  }
-  
-  /* ---------------- Botón CTA ---------------- */
+}
+
+/* ---------------- Botón CTA ---------------- */
 .cta {
   background: transparent;
   color: var(--color-white);
-  font-size: var(--Graph-p);           /* 18 → 24 px */
+  font-size: var(--Graph-p); /* 18 → 24 px */
   font-weight: 300;
   padding: 0.6rem 3rem;
   border: var(--Naranja-Tundata) solid 1px;
   border-radius: 0.75rem;
   cursor: pointer;
-  transition: transform 0.2s ease, filter 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
   text-transform: capitalize;
   font-family: var(--font-ibm-plex-sans);
 }
@@ -94,13 +95,12 @@
   transform: translateY(-2px);
   background: var(--Naranja-Tundata);
   transition: background 0.25s ease;
-  
 }
 
-@media (max-width: 640px) {           /* sm */
+@media (max-width: 640px) {
+  /* sm */
   .cta {
     width: 100%;
     background: var(--Naranja-Tundata);
   }
 }
-

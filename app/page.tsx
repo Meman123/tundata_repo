@@ -9,33 +9,14 @@ import Frame from '@/components/Kpi/Frame';
 // GSAP + Plugins
 import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-// import ScrollSmoother from 'gsap/ScrollSmoother';
 
-gsap.registerPlugin(ScrollTrigger /* , ScrollSmoother */);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const headerRef = useRef<HTMLElement | null>(null);
   const heroHeight = useAvailableViewportHeight(headerRef);
 
-  /*
-  useEffect(() => {
-    const smoother = ScrollSmoother.create({
-      smooth: 1.5,
-      effects: true,
-      normalizeScroll: true,
-      ignoreMobileResize: true,
-      content: '#smooth-content',
-      wrapper: '#smooth-wrapper',
-    });
-
-    return () => {
-      if (smoother) smoother.kill();
-    };
-  }, []);
-  */
-
   return (
-    // ya no necesitas los divs con IDs especiales
     <main className="w-full min-h-screen flex flex-col bg-Naranja overflow-x-hidden">
       <Header ref={headerRef} />
       <Hero height={heroHeight} />

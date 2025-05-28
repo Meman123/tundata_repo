@@ -1,11 +1,20 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { IBM_Plex_Sans } from 'next/font/google';
+import './globals.css';
 
 // Metadatos reales
 export const metadata: Metadata = {
-  title: "Tundata",
-  description: "Accede a información pública verificada y participa en la transformación de Duitama.",
+  title: 'Tundata',
+  description:
+    'Accede a información pública verificada y participa en la transformación de Duitama.',
 };
+
+const ibmPlexSans = IBM_Plex_Sans({
+  weight: ['100', '200', '300', '400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 export default function RootLayout({
   children,
@@ -14,17 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body className="antialiased">
-        {children}
-      </body>
+      <body className={`${ibmPlexSans.className} antialiased`}>{children}</body>
     </html>
   );
 }

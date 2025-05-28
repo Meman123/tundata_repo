@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrambleTextPlugin);
 
 export default function BarraPresupuesto({
   gastado,
-  total
+  total,
 }: {
   gastado: number;
   total: number;
@@ -39,7 +39,7 @@ export default function BarraPresupuesto({
                 width: `${porcentaje}%`,
                 duration: 2,
                 ease: 'power2.out',
-              }
+              },
             );
           }
 
@@ -52,11 +52,9 @@ export default function BarraPresupuesto({
                 chars: '0123456789,',
                 revealDelay: 0.5,
               },
-              ease: 'none'
+              ease: 'none',
             });
           }
-
-          
 
           // Anima el porcentaje
           if (porcentajeRef.current) {
@@ -67,27 +65,40 @@ export default function BarraPresupuesto({
                 chars: '0123456789%',
                 revealDelay: 0.5,
               },
-              ease: 'none'
+              ease: 'none',
             });
           }
 
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.5 },
     );
 
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, [porcentaje, gastado, porcentajeTexto, hasAnimated]);
 
+  const gastadoFormateado = gastado.toLocaleString();
+  const totalFormateado = total.toLocaleString();
+  const valorTexto = `${gastadoFormateado}M de ${totalFormateado}M ejecutados (${porcentaje.toFixed(1)}%)`;
+
   return (
-    <div className={styles.wrapper} ref={containerRef}>
+    <div
+      className={styles.wrapper}
+      ref={containerRef}
+      aria-label="Progreso del presupuesto anual"
+    >
       <div className={styles.track}>
         <div
           className={styles.fill}
           ref={fillRef}
           style={{ width: `${hasAnimated ? porcentaje : 0}%` }}
+          role="progressbar"
+          aria-valuenow={porcentaje}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuetext={valorTexto}
         >
           <div className={styles.shine} />
           <span className={styles.valorIzq} ref={valorIzqRef}>
@@ -95,9 +106,7 @@ export default function BarraPresupuesto({
           </span>
         </div>
 
-        <span className={styles.valorDer}>
-          ${total.toLocaleString()}M
-        </span>
+        <span className={styles.valorDer}>${total.toLocaleString()}M</span>
 
         <div className={styles.labelCentroWrapper}>
           <span className={styles.labelCentro} ref={porcentajeRef}>
@@ -107,7 +116,8 @@ export default function BarraPresupuesto({
       </div>
 
       <div className={styles.subtitulo}>
-        % del <span className={styles.highlight}>Presupuesto Anual</span> Ejecutado
+        % del <span className={styles.highlight}>Presupuesto Anual</span>{' '}
+        Ejecutado
       </div>
     </div>
   );

@@ -1,13 +1,11 @@
-import { useEffect, useState, RefObject } from "react";
+import { useEffect, useState, RefObject } from 'react';
 
 /**
  * Devuelve la altura disponible en viewport menos la altura del ref actual.
  * El ref puede ser null y se maneja de forma segura.
  */
-export function useAvailableViewportHeight(
-  ref: RefObject<HTMLElement | null>
-) {
-  const [height, setHeight] = useState("100vh");
+export function useAvailableViewportHeight(ref: RefObject<HTMLElement | null>) {
+  const [height, setHeight] = useState('100vh');
 
   useEffect(() => {
     const update = () => {
@@ -18,8 +16,8 @@ export function useAvailableViewportHeight(
     };
 
     update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
   }, [ref]);
 
   return height;
